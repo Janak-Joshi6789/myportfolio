@@ -130,7 +130,7 @@ const projects = [
   },
 ]
 
-const cats = ['All', 'Web Development', 'Networking', 'Cybersecurity', 'AI / ML']
+const cats = ['All', 'Web Development', 'Networking', 'AI / ML']
 
 export default function Projects() {
   const [filter, setFilter] = useState('All')
