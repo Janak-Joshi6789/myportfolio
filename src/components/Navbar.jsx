@@ -289,7 +289,7 @@ export default function Navbar() {
             position: fixed;
             top: 0;
             right: -100%;
-            width: 75%;
+            width: 45%;
             height: 100vh;
             background: var(--bg2);
             flex-direction: column;
