@@ -4,7 +4,8 @@ export default function Footer() {
       <div className="container">
         <div className="footer-inner">
           <div className="footer-logo">
-            <span className="logo-bracket">&lt;</span>JJ<span className="logo-bracket">/&gt;</span>
+            <img src="/favicon.png" alt="JJ" className="logo-icon" />
+
           </div>
           <p className="footer-text">
             Er. Janak Raj Joshi — Computer Engineer · Kathmandu, Nepal
@@ -15,6 +16,13 @@ export default function Footer() {
         </div>
       </div>
       <style>{`
+.logo-icon {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+  vertical-align: middle;
+}
+
         .footer {
           border-top: 1px solid var(--border);
           padding: 2.5rem 1.5rem;
@@ -26,6 +34,7 @@ export default function Footer() {
           font-size: 1.4rem; font-weight: 800;
           color: var(--text); margin-bottom: 0.25rem;
         }
+          
         .logo-bracket { color: var(--primary); }
         .footer-text { font-size: 0.88rem; color: var(--muted); }
         .footer-copy { font-size: 0.78rem; color: rgba(148,163,184,0.5); font-family: var(--font-mono); }

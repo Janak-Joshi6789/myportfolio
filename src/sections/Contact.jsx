@@ -89,25 +89,25 @@ export default function Contact() {
             <div className="contact-links">
               {[
                 {
-                  label: 'Email',
+                  label: 'Email: ',
                   val: 'janakjoshi6789@gmail.com',
                   href: 'mailto:janakjoshi6789@gmail.com',
                   icon: '✉️'
                 },
                 {
-                  label: 'Phone',
+                  label: 'Phone: ',
                   val: '+977 9848840530',
                   href: 'tel:9848840530',
                   icon: '📞'
                 },
                 {
-                  label: 'Location',
+                  label: 'Location: ',
                   val: 'Koteshwor, Kathmandu, Nepal',
                   href: null,
                   icon: '📍'
                 },
                 {
-                  label: 'GitHub',
+                  label: 'GitHub: ',
                   val: 'Janak-Joshi6789',
                   href: 'https://github.com/Janak-Joshi6789',
                   icon: '💻'

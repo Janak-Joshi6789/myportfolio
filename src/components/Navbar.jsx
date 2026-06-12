@@ -59,13 +59,15 @@ export default function Navbar() {
         {/* Logo */}
         <a
           className="nav-logo"
-          href="#"
+          href="www.joshijanak.com.np"
           onClick={(e) => {
             e.preventDefault()
             window.scrollTo({ top: 0, behavior: 'smooth' })
           }}
         >
-          <span className="logo-bracket">&lt;</span>JJ<span className="logo-bracket">/&gt;</span>
+       
+<img src="/favicon.png" alt="JJ" className="logo-icon" />
+
         </a>
 
         {/* Links */}
@@ -131,6 +133,12 @@ export default function Navbar() {
           --muted: #475569;
           --card: rgba(0,0,0,0.04);
         }
+          .logo-icon {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+  vertical-align: middle;
+}
 
         /* ================= NAVBAR ================= */
         .navbar {
