@@ -192,6 +192,7 @@ export default function Navbar() {
           align-items: center;
           gap: 0.2rem;
           list-style: none;
+          
         }
 
         .nav-link {
@@ -228,6 +229,16 @@ export default function Navbar() {
           cursor: pointer;
           color: var(--muted);
         }
+          .theme-toggle-inline {
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+}
 
         /* ================= HAMBURGER ================= */
         .hamburger {
