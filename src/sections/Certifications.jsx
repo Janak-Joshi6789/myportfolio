@@ -8,7 +8,7 @@ const certs = [
     icon: '🏛️',
     color: '#f59e0b',
     colorRaw: '#f59e0b',
-    desc: 'Official registration as a General Registered Engineer (Computer Engineering) under Nepal Engineering Council Act, 2055. Regd. No. 94463 — issued 2025-11-13.',
+    desc: 'Official registration as a General Registered Engineer (Computer Engineering) under Nepal Engineering Council Act, 2055. Regd. No. 94***.',
     image: '/certs/nec.jpg',
     credential: null,
   },
