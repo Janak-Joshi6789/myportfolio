@@ -14,16 +14,16 @@ export default function About() {
             </h2>
             <div className="about-paras">
               <p>
-                I'm <strong>Janak Raj Joshi</strong>, a Computer Engineering graduate from
+                I'm <strong>Janak Raj Joshi</strong> (Er. Janak Joshi), a Computer Engineering graduate from
                 Khowpa Engineering College, Bhaktapur (2021–2025). My technical journey spans
                 three pillars: networking infrastructure, cybersecurity, and full-stack web development.
               </p>
               <p>
-                I hold hands-on experience from CCNA labs, cybersecurity training at Broadway Infosys,
+                I hold hands-on experience from cybersecurity training at Broadway Infosys,
                 multiple Security Blue Team and Cisco Academy certifications. 
               </p>
               <p>
-                Based in <span className="text-accent2">Koteshwor, Kathmandu</span>. Currently
+                Based in <span className="text-accent2">Koteshwor, Kathmandu</span> (Hometown: Kanchanpur, Sudurpashim). Currently
                 open to roles in network engineering, cybersecurity, or web development.
               </p>
             </div>
