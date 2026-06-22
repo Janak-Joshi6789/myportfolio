@@ -184,7 +184,7 @@ export default function Hero() {
 
       {/* Stats bar */}
       <div className="hero-stats-bar">
-        {[['BE Computer', 'Khwopa Enggineering College'], ['3', 'Core Domains'], ['15+', 'Projects Built'], ['10+', 'Certifications']].map(([n, l]) => (
+        {[['BE Computer', 'Khwopa Engineering College'], ['3', 'Core Domains'], ['15+', 'Projects Built'], ['10+', 'Certifications']].map(([n, l]) => (
           <div key={l} className="stat">
             <span className="stat-num">{n}</span>
             <span className="stat-label">{l}</span>
