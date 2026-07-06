@@ -59,7 +59,7 @@ const projects = [
   {
   title: 'Cricket Association of Nepal Website',
   category: 'Web Development',
-  color: 'var(--accent2)',
+  color: 'var(--)',
   tags: ['HTML', 'CSS', 'JavaScript', 'Bootstrap'],
   desc: 'Official-style website developed for the Cricket Association of Nepal (CAN)featuring player profiles, team information, match schedules and tournament updates.',
   icon: '🏏',
