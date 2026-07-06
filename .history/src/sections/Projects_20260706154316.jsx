@@ -18,7 +18,7 @@ const projects = [
   {
   title: 'RankUp Nepal',
   category: 'Full Stack Web Development',
-  color: 'var(--accent2)',
+  color: 'var(--accent1)',
   tags: ['React.js', 'Node.js', 'Express.js', 'PostgreSQL'],
   desc: 'A full-stack online exam preparation platform for Loksewa and competitive exams. Features practice tests, mock exams, study materials, user authentication, progress tracking, and an admin dashboard for managing questions and content.',
   icon: '📚',
@@ -29,7 +29,7 @@ const projects = [
     title: 'EV Fast Energy Website',
     category: 'Web Development',
     color: 'var(--accent2)',
-    tags: ['React.js', 'Tailwind CSS', 'Responsive'],
+    tags: ['Next.js', 'React', 'Tailwind CSS', 'Responsive'],
     desc: "Nepal's leading EV fast charging solutions provider website. Features product listings, solutions, services, and a full responsive layout built with Next.js.",
     icon: '⚡',
    live: 'https://evfastenergy.com/', 
@@ -39,8 +39,8 @@ const projects = [
   {
   title: 'Tour & Travels Website',
   category: 'Web Development',
-  color: 'var(--accent2)',
-  tags: ['React.js', 'Tailwind CSS', 'Responsive'],
+  color: 'var(--accent3)',
+  tags: ['React.js', 'Tailwind CSS', 'Responsive', 'Travel'],
   desc: 'A modern and responsive tour and travel website featuring destination showcases, tour packages, travel services, booking-oriented pages, and an engaging user experience with a clean, mobile-friendly interface.',
   icon: '✈️',
   live: 'https://tour-travel-project-seven.vercel.app/',

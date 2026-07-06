@@ -29,7 +29,7 @@ const projects = [
     title: 'EV Fast Energy Website',
     category: 'Web Development',
     color: 'var(--accent2)',
-    tags: ['React.js', 'Tailwind CSS', 'Responsive'],
+    tags: ['Next.js', 'React', 'Tailwind CSS', 'Responsive'],
     desc: "Nepal's leading EV fast charging solutions provider website. Features product listings, solutions, services, and a full responsive layout built with Next.js.",
     icon: '⚡',
    live: 'https://evfastenergy.com/', 
