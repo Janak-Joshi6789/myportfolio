@@ -33,7 +33,7 @@ const projects = [
     desc: "Nepal's leading EV fast charging solutions provider website. Features product listings, solutions, services, and a full responsive layout built with Next.js.",
     icon: '⚡',
    live: 'https://evfastenergy.com/', 
-  //  github: 'https://github.com/Janak-Joshi6789/evfastenergy.git',
+   github: 'https://github.com/Janak-Joshi6789/evfastenergy.git',
     
   },
   {

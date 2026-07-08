@@ -23,7 +23,7 @@ const projects = [
   desc: 'A full-stack online exam preparation platform for Loksewa and competitive exams. Features practice tests, mock exams, study materials, user authentication, progress tracking, and an admin dashboard for managing questions and content.',
   icon: '📚',
   live: 'https://rankupnepal.com/', 
-  // github: 'https://github.com/Janak-Joshi6789/rankup-nepal.git',
+  github: 'https://github.com/Janak-Joshi6789/rankup-nepal.git',
 },
   {
     title: 'EV Fast Energy Website',
@@ -33,7 +33,7 @@ const projects = [
     desc: "Nepal's leading EV fast charging solutions provider website. Features product listings, solutions, services, and a full responsive layout built with Next.js.",
     icon: '⚡',
    live: 'https://evfastenergy.com/', 
-  //  github: 'https://github.com/Janak-Joshi6789/evfastenergy.git',
+   github: 'https://github.com/Janak-Joshi6789/evfastenergy.git',
     
   },
   {
