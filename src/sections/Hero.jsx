@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 
-const roles = ['Computer Engineer',  'Web Developer', 'Network Engineer', 'Cybersecurity Enthusiast']
+const roles = ['Computer Engineer',   'Network Engineer', 'Cybersecurity Enthusiast']
 
 const socials = [
   {
@@ -87,10 +87,10 @@ export default function Hero() {
       <div className="hero-inner">
         {/* LEFT — Text content */}
         <div className="hero-content">
-          <div className="hero-badge">
+          {/* <div className="hero-badge">
             <span className="badge-dot" />
             Available for opportunities
-          </div>
+          </div> */}
 
           <h1 className="hero-name">
             Er. Janak
@@ -164,27 +164,30 @@ export default function Hero() {
               <span>Add your photo</span>
               <code>public/photo.jpg</code>
             </div>
-            <img src="/photo.jpeg" alt="Janak Raj Joshi" className="photo-img" onError={e => { e.target.style.display = 'none' }} />
+            <img src="/photo.png" alt="Janak Raj Joshi" className="photo-img" onError={e => { e.target.style.display = 'none' }} />
           </div>
           {/* Floating skill badges */}
-          <div className="float-badge badge-net">
-            <span>🌐</span> Networking
-          </div>
-          <div className="float-badge badge-sec">
-            <span>🛡️</span> CyberSecurity
-          </div>
-          <div className="float-badge badge-web">
-            <span>💻</span> Web Development
-          </div>
-          <div className="float-badge badge-ai">
-            <span>🤖</span> AI / ML
-          </div>
+         <div className="float-badge badge-net">
+  <span>🌐</span> Network Engineering
+</div>
+
+<div className="float-badge badge-sec">
+  <span>🛡️</span> Cybersecurity
+</div>
+
+<div className="float-badge badge-web">
+  <span>🔍</span> Penetration Testing
+</div>
+
+<div className="float-badge badge-ai">
+  <span>📡</span> Network Security
+</div>
         </div>
       </div>
 
       {/* Stats bar */}
       <div className="hero-stats-bar">
-        {[['BE Computer', 'Khwopa Engineering College'], ['3', 'Core Domains'], ['15+', 'Projects Built'], ['10+', 'Certifications']].map(([n, l]) => (
+        {[['BE Computer', 'Khwopa Engineering College'],  ['15+', 'Projects Built'], ['10+', 'Certifications']].map(([n, l]) => (
           <div key={l} className="stat">
             <span className="stat-num">{n}</span>
             <span className="stat-label">{l}</span>
@@ -367,7 +370,7 @@ export default function Hero() {
           color: var(--primary);
         }
         .photo-img {
-          position: absolute; inset: 0; width: 100%; height: 100%;
+          position: absolute; inset: 0; width: 105%; height: 105%;
           object-fit: cover; object-position: center top;
           border-radius: 50%;
         }
