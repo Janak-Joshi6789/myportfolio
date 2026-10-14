@@ -1,5 +1,44 @@
 const skillGroups = [
+ 
   {
+    category: "Networking",
+    color: "var(--primary)",
+    skills: [
+      { name: "Wireshark", svg: null, fallback: "🦈" },
+      { name: "Nmap", svg: null, fallback: "🔍" },
+      { name: "TCP/IP", svg: null, fallback: "🌐" },
+      { name: "VLANs", svg: null, fallback: "📡" },
+      { name: "NAT / PAT", svg: null, fallback: "🔀" },
+      { name: "DHCP & DNS", svg: null, fallback: "⚙️" },
+      { name: "Firewall/VPN", svg: null, fallback: "🛡" },
+      { name: "Subnetting", svg: null, fallback: "🧮" },
+      { name: "GNS3", svg: null, fallback: "🖥" },
+      { name: "Packet Tracer", svg: null, fallback: "📦" },
+      {
+        name: "Linux",
+        svg: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg",
+      },
+    ],
+  },
+  {
+    category: "Cybersecurity",
+    color: "var(--accent)",
+    skills: [
+      { name: "Kali Linux", svg: null, fallback: "💀" },
+      { name: "Metasploit", svg: null, fallback: "⚔️" },
+      { name: "Burp Suite", svg: null, fallback: "🕷" },
+      { name: "Nessus", svg: null, fallback: "🔬" },
+      { name: "Wazuh SIEM", svg: null, fallback: "📊" },
+      { name: "OSINT", svg: null, fallback: "🔎" },
+      { name: "Wireshark", svg: null, fallback: "🦈" },
+      { name: "Nmap", svg: null, fallback: "🗺" },
+      { name: "OpenVAS", svg: null, fallback: "🧪" },
+      { name: "Cryptography", svg: null, fallback: "🔐" },
+      { name: "OWASP", svg: null, fallback: "🌀" },
+      { name: "Blue Team", svg: null, fallback: "🔵" },
+    ],
+  },
+   {
     category: "Web Development",
     color: "var(--accent2)",
     skills: [
@@ -69,44 +108,6 @@ const skillGroups = [
       },
     ],
   },
-  {
-    category: "Networking",
-    color: "var(--primary)",
-    skills: [
-      { name: "Wireshark", svg: null, fallback: "🦈" },
-      { name: "Nmap", svg: null, fallback: "🔍" },
-      { name: "TCP/IP", svg: null, fallback: "🌐" },
-      { name: "VLANs", svg: null, fallback: "📡" },
-      { name: "NAT / PAT", svg: null, fallback: "🔀" },
-      { name: "DHCP & DNS", svg: null, fallback: "⚙️" },
-      { name: "Firewall/VPN", svg: null, fallback: "🛡" },
-      { name: "Subnetting", svg: null, fallback: "🧮" },
-      { name: "GNS3", svg: null, fallback: "🖥" },
-      { name: "Packet Tracer", svg: null, fallback: "📦" },
-      {
-        name: "Linux",
-        svg: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg",
-      },
-    ],
-  },
-  {
-    category: "Cybersecurity",
-    color: "var(--accent)",
-    skills: [
-      { name: "Kali Linux", svg: null, fallback: "💀" },
-      { name: "Metasploit", svg: null, fallback: "⚔️" },
-      { name: "Burp Suite", svg: null, fallback: "🕷" },
-      { name: "Nessus", svg: null, fallback: "🔬" },
-      { name: "Wazuh SIEM", svg: null, fallback: "📊" },
-      { name: "OSINT", svg: null, fallback: "🔎" },
-      { name: "Wireshark", svg: null, fallback: "🦈" },
-      { name: "Nmap", svg: null, fallback: "🗺" },
-      { name: "OpenVAS", svg: null, fallback: "🧪" },
-      { name: "Cryptography", svg: null, fallback: "🔐" },
-      { name: "OWASP", svg: null, fallback: "🌀" },
-      { name: "Blue Team", svg: null, fallback: "🔵" },
-    ],
-  },
 ];
 
 function SkillTile({ name, svg, fallback, accentColor }) {
@@ -136,6 +137,7 @@ function SkillTile({ name, svg, fallback, accentColor }) {
       <span className="tile-name">{name}</span>
     </div>
   );
+  
 }
 
 export default function Skills() {
@@ -144,7 +146,7 @@ export default function Skills() {
       <div className="container">
         <div className="section-label">
           <span className="label-line" />
-          <span className="font-mono text-primary text-sm">02 — Skills</span>
+          <span className="font-mono text-primary text-sm">Skills</span>
         </div>
         <h2 className="section-title">
           Technical <span className="text-primary">Proficiency</span>

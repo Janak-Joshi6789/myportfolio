@@ -1,7 +1,18 @@
 import { useState } from 'react'
 
 const certs = [
-   {
+  {
+  title: 'Network Administrator',
+  issuer: 'ITech International',
+  date: '1 Year Experience',
+  icon: '🌐',
+  color: '#3b82f6',
+  colorRaw: '#3b82f6',
+  desc: 'One year of professional experience in network administration, network infrastructure management, troubleshooting, routing and switching, and network security.',
+  image: '/certs/experience.png',
+  credential: null,
+},
+  {
     title: 'Registered Engineer License',
     issuer: 'Nepal Engineering Council',
     date: 'Nov 2025',
@@ -12,6 +23,7 @@ const certs = [
     image: '/certs/nec.jpg',
     credential: null,
   },
+  
   {
     title: 'Advanced Cybersecurity',
     issuer: 'Broadway Infosys',
@@ -123,9 +135,9 @@ export default function Certifications() {
       <div className="container">
         <div className="section-label">
           <span className="label-line" />
-          <span className="font-mono text-primary text-sm">04 — Certifications</span>
+          <span className="font-mono text-primary text-sm">Experience & Certifications</span>
         </div>
-        <h2 className="section-title">Certifications <span className="text-primary">& Training</span></h2>
+        <h2 className="section-title">Experience, Certifications <span className="text-primary">& Training</span></h2>
         <p className="section-sub">Industry-recognized credentials and professional development</p>
 
         <div className="certs-grid">

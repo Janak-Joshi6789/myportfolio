@@ -164,7 +164,7 @@ export default function Projects() {
       <div className="container">
         <div className="section-label">
           <span className="label-line" />
-          <span className="font-mono text-primary text-sm">03 — Projects</span>
+          <span className="font-mono text-primary text-sm">Projects</span>
         </div>
         <h2 className="section-title">What <span className="text-primary">I've Built</span></h2>
         <p className="section-sub">Projects spanning networking labs, security research, and full-stack web applications</p>

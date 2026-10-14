@@ -50,7 +50,7 @@ export default function Contact() {
 
         <div className="section-label">
           <span className="label-line" />
-          <span className="font-mono text-primary text-sm">06 — Contact</span>
+          <span className="font-mono text-primary text-sm">Contact</span>
         </div>
 
         <h2 className="section-title">
@@ -74,7 +74,7 @@ export default function Contact() {
 
               <ul className="open-to">
                 {[
-                  'Junior Web Developer roles',
+                  
                   'Network Engineer roles',
                   'SOC Analyst / Cybersecurity positions',
                   'Freelance projects'

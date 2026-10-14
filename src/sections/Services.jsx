@@ -87,7 +87,7 @@ export default function Services() {
       <div className="container">
         <div className="section-label">
           <span className="label-line" />
-          <span className="font-mono text-primary text-sm">05 — Services</span>
+          <span className="font-mono text-primary text-sm">Services</span>
         </div>
         <h2 className="section-title">What <span className="text-primary">I Offer</span></h2>
         <p className="section-sub">Professional services across web development, networking, and cybersecurity</p>
