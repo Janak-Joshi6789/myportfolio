@@ -549,6 +549,30 @@ export default function Hero() {
 
   useEffect(() => () => clearTimeout(phaseTimer.current), [])
 
+  /* AUTO TOGGLE: every 10-15s of rest, flip the mask automatically.
+     Any click (or finished transition) changes `phase`, which resets this timer. */
+  useEffect(() => {
+    if (phase !== 'masked' && phase !== 'unmasked') return
+
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (reduce) return
+
+    const delay = 10000 + Math.random() * 5000
+
+    const auto = setTimeout(() => {
+      const next = phase === 'masked' ? 'unmasking' : 'masking'
+      setPhase(next)
+
+      clearTimeout(phaseTimer.current)
+      phaseTimer.current = setTimeout(
+        () => setPhase(next === 'unmasking' ? 'unmasked' : 'masked'),
+        TRANSITION_MS
+      )
+    }, delay)
+
+    return () => clearTimeout(auto)
+  }, [phase])
+
   const isUnmasked = phase === 'unmasking' || phase === 'unmasked'
 
   /* Theme is controlled by Navbar */
