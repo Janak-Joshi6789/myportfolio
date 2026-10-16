@@ -57,14 +57,10 @@ function MatrixRain({ light }) {
 
   useEffect(() => {
     const canvas = ref.current
-
     if (!canvas) return
 
     const ctx = canvas.getContext('2d')
-
-    const chars =
-      '01アイウエオカキクケコサシスセソ{}<>/#$%&ABCDEF'.split('')
-
+    const chars = '01アイウエオカキクケコサシスセソ{}<>/#$%&ABCDEF'.split('')
     const size = 16
 
     let cols
@@ -72,49 +68,32 @@ function MatrixRain({ light }) {
     let raf
     let last = 0
 
-    const reduce = window
-      .matchMedia('(prefers-reduced-motion: reduce)')
-      .matches
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
     const resize = () => {
       canvas.width = canvas.offsetWidth
       canvas.height = canvas.offsetHeight
-
       cols = Math.floor(canvas.width / size)
-
-      drops = Array.from(
-        { length: cols },
-        () => Math.random() * -50
-      )
+      drops = Array.from({ length: cols }, () => Math.random() * -50)
     }
 
     resize()
-
     window.addEventListener('resize', resize)
 
     const draw = t => {
       raf = requestAnimationFrame(draw)
-
       if (t - last < 55) return
-
       last = t
 
       ctx.fillStyle = light
         ? 'rgba(240, 250, 245, 0.14)'
         : 'rgba(3, 8, 6, 0.12)'
-
-      ctx.fillRect(
-        0,
-        0,
-        canvas.width,
-        canvas.height
-      )
+      ctx.fillRect(0, 0, canvas.width, canvas.height)
 
       ctx.font = `${size}px monospace`
 
       for (let i = 0; i < cols; i++) {
-        const ch =
-          chars[Math.floor(Math.random() * chars.length)]
+        const ch = chars[Math.floor(Math.random() * chars.length)]
 
         ctx.fillStyle = light
           ? Math.random() > 0.97
@@ -124,16 +103,9 @@ function MatrixRain({ light }) {
             ? '#d9ffe9'
             : '#00ff9c'
 
-        ctx.fillText(
-          ch,
-          i * size,
-          drops[i] * size
-        )
+        ctx.fillText(ch, i * size, drops[i] * size)
 
-        if (
-          drops[i] * size > canvas.height &&
-          Math.random() > 0.975
-        ) {
+        if (drops[i] * size > canvas.height && Math.random() > 0.975) {
           drops[i] = 0
         }
 
@@ -142,16 +114,8 @@ function MatrixRain({ light }) {
     }
 
     if (reduce) {
-      ctx.fillStyle = light
-        ? '#f0faf5'
-        : '#030806'
-
-      ctx.fillRect(
-        0,
-        0,
-        canvas.width,
-        canvas.height
-      )
+      ctx.fillStyle = light ? '#f0faf5' : '#030806'
+      ctx.fillRect(0, 0, canvas.width, canvas.height)
     } else {
       raf = requestAnimationFrame(draw)
     }
@@ -162,156 +126,70 @@ function MatrixRain({ light }) {
     }
   }, [light])
 
-  return (
-    <canvas
-      ref={ref}
-      className="hx-rain"
-      aria-hidden="true"
-    />
-  )
+  return <canvas ref={ref} className="hx-rain" aria-hidden="true" />
 }
 
 /* =========================================================
    MODERN CYBERPUNK HACKER MASK
+   (the mask/unmask animation is driven by the parent button)
    ========================================================= */
 
-function HackerMask({ unmasked }) {
+function HackerMask() {
   const eyes = useRef(null)
 
   useEffect(() => {
     const move = e => {
       if (!eyes.current) return
 
-      const x =
-        (e.clientX / window.innerWidth - 0.5) * 7
+      const x = (e.clientX / window.innerWidth - 0.5) * 7
+      const y = (e.clientY / window.innerHeight - 0.5) * 4
 
-      const y =
-        (e.clientY / window.innerHeight - 0.5) * 4
-
-      eyes.current.style.transform =
-        `translate(${x}px, ${y}px)`
+      eyes.current.style.transform = `translate(${x}px, ${y}px)`
     }
 
     window.addEventListener('mousemove', move)
-
-    return () =>
-      window.removeEventListener('mousemove', move)
+    return () => window.removeEventListener('mousemove', move)
   }, [])
 
   return (
     <svg
       viewBox="0 0 320 360"
-      className={`hx-mask ${
-        unmasked ? 'is-off' : ''
-      }`}
+      className="hx-mask"
       role="img"
       aria-label="Cyberpunk hacker mask"
     >
       <defs>
-
         {/* Edge gradient */}
-        <linearGradient
-          id="cyberEdge"
-          x1="0"
-          y1="0"
-          x2="1"
-          y2="1"
-        >
-          <stop
-            offset="0%"
-            stopColor="#00ff9c"
-          />
-
-          <stop
-            offset="50%"
-            stopColor="#22d3ee"
-          />
-
-          <stop
-            offset="100%"
-            stopColor="#00ff9c"
-          />
+        <linearGradient id="cyberEdge" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#00ff9c" />
+          <stop offset="50%" stopColor="#22d3ee" />
+          <stop offset="100%" stopColor="#00ff9c" />
         </linearGradient>
 
         {/* Hood */}
-        <linearGradient
-          id="cyberHood"
-          x1="0"
-          y1="0"
-          x2="0"
-          y2="1"
-        >
-          <stop
-            offset="0%"
-            stopColor="#10251e"
-          />
-
-          <stop
-            offset="45%"
-            stopColor="#06110d"
-          />
-
-          <stop
-            offset="100%"
-            stopColor="#010403"
-          />
+        <linearGradient id="cyberHood" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#10251e" />
+          <stop offset="45%" stopColor="#06110d" />
+          <stop offset="100%" stopColor="#010403" />
         </linearGradient>
 
         {/* Face */}
-        <linearGradient
-          id="cyberFace"
-          x1="0"
-          y1="0"
-          x2="1"
-          y2="1"
-        >
-          <stop
-            offset="0%"
-            stopColor="#163c2f"
-          />
-
-          <stop
-            offset="45%"
-            stopColor="#071912"
-          />
-
-          <stop
-            offset="100%"
-            stopColor="#020806"
-          />
+        <linearGradient id="cyberFace" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#163c2f" />
+          <stop offset="45%" stopColor="#071912" />
+          <stop offset="100%" stopColor="#020806" />
         </linearGradient>
 
         {/* Eye */}
-        <linearGradient
-          id="cyberEye"
-          x1="0"
-          y1="0"
-          x2="1"
-          y2="0"
-        >
-          <stop
-            offset="0%"
-            stopColor="#22d3ee"
-          />
-
-          <stop
-            offset="50%"
-            stopColor="#00ff9c"
-          />
-
-          <stop
-            offset="100%"
-            stopColor="#22d3ee"
-          />
+        <linearGradient id="cyberEye" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stopColor="#22d3ee" />
+          <stop offset="50%" stopColor="#00ff9c" />
+          <stop offset="100%" stopColor="#22d3ee" />
         </linearGradient>
 
         {/* Glow */}
         <filter id="cyberGlow">
-          <feGaussianBlur
-            stdDeviation="3"
-            result="blur"
-          />
-
+          <feGaussianBlur stdDeviation="3" result="blur" />
           <feMerge>
             <feMergeNode in="blur" />
             <feMergeNode in="SourceGraphic" />
@@ -326,13 +204,9 @@ function HackerMask({ unmasked }) {
         <clipPath id="eyeClip">
           <path d="M78 142 Q160 110 242 142 L229 174 Q160 153 91 174 Z" />
         </clipPath>
-
       </defs>
 
-      {/* =====================================================
-          OUTER ORBITS
-         ===================================================== */}
-
+      {/* OUTER ORBITS */}
       <circle
         className="hx-ring r1"
         cx="160"
@@ -358,20 +232,14 @@ function HackerMask({ unmasked }) {
       />
 
       {/* Digital nodes */}
-      <g
-        className="hx-nodes"
-        fill="#00ff9c"
-      >
+      <g className="hx-nodes" fill="#00ff9c">
         <circle cx="40" cy="110" r="2" />
         <circle cx="280" cy="120" r="2" />
         <circle cx="48" cy="265" r="2" />
         <circle cx="270" cy="280" r="2" />
       </g>
 
-      {/* =====================================================
-          HOOD
-         ===================================================== */}
-
+      {/* HOOD */}
       <path
         d="
           M160 12
@@ -390,7 +258,6 @@ function HackerMask({ unmasked }) {
       />
 
       {/* Inner hood */}
-
       <path
         d="
           M160 34
@@ -403,14 +270,9 @@ function HackerMask({ unmasked }) {
         fill="#010604"
       />
 
-      {/* =====================================================
-          FACE
-         ===================================================== */}
-
+      {/* FACE */}
       <g className="hx-face">
-
         {/* Face glow */}
-
         <path
           d="
             M160 54
@@ -429,7 +291,6 @@ function HackerMask({ unmasked }) {
         />
 
         {/* Angular face */}
-
         <path
           d="
             M160 54
@@ -449,16 +310,9 @@ function HackerMask({ unmasked }) {
         />
 
         {/* Forehead center */}
-
-        <path
-          d="M160 55 L160 111"
-          stroke="#00ff9c"
-          strokeWidth="1"
-          opacity=".5"
-        />
+        <path d="M160 55 L160 111" stroke="#00ff9c" strokeWidth="1" opacity=".5" />
 
         {/* Forehead symbol */}
-
         <path
           className="hx-gem"
           d="M160 73 L171 87 L160 101 L149 87 Z"
@@ -467,18 +321,9 @@ function HackerMask({ unmasked }) {
           strokeWidth="1.5"
         />
 
-        <circle
-          cx="160"
-          cy="87"
-          r="2.5"
-          fill="#00ff9c"
-          filter="url(#cyberGlow)"
-        />
+        <circle cx="160" cy="87" r="2.5" fill="#00ff9c" filter="url(#cyberGlow)" />
 
-        {/* =================================================
-            EYE VISOR
-           ================================================= */}
-
+        {/* EYE VISOR */}
         <path
           d="
             M78 142
@@ -492,9 +337,7 @@ function HackerMask({ unmasked }) {
         />
 
         <g clipPath="url(#eyeClip)">
-
           {/* Scanning beam */}
-
           <rect
             className="hx-sweep"
             x="75"
@@ -506,11 +349,7 @@ function HackerMask({ unmasked }) {
           />
 
           {/* Eyes */}
-
-          <g
-            ref={eyes}
-            className="hx-eyes"
-          >
+          <g ref={eyes} className="hx-eyes">
             <path
               d="M95 150 L143 143 L140 157 L99 165 Z"
               fill="url(#cyberEye)"
@@ -523,13 +362,9 @@ function HackerMask({ unmasked }) {
               filter="url(#cyberGlow)"
             />
           </g>
-
         </g>
 
-        {/* =================================================
-            FACE CIRCUITS
-           ================================================= */}
-
+        {/* FACE CIRCUITS */}
         <g
           className="hx-face-lines"
           fill="none"
@@ -537,55 +372,29 @@ function HackerMask({ unmasked }) {
           strokeWidth="1"
           opacity=".65"
         >
-
           {/* Left */}
-
           <path d="M91 185 L112 203 L112 225" />
           <path d="M112 203 H132" />
           <path d="M101 194 H88" />
 
           {/* Right */}
-
           <path d="M229 185 L208 203 L208 225" />
           <path d="M208 203 H188" />
           <path d="M219 194 H232" />
 
           {/* Center */}
-
           <path d="M160 174 V212" />
           <path d="M145 221 H175" />
-
         </g>
 
         {/* Circuit nodes */}
-
-        <g
-          fill="#00ff9c"
-          filter="url(#cyberGlow)"
-        >
-          <circle
-            cx="112"
-            cy="203"
-            r="2"
-          />
-
-          <circle
-            cx="208"
-            cy="203"
-            r="2"
-          />
-
-          <circle
-            cx="160"
-            cy="212"
-            r="2"
-          />
+        <g fill="#00ff9c" filter="url(#cyberGlow)">
+          <circle cx="112" cy="203" r="2" />
+          <circle cx="208" cy="203" r="2" />
+          <circle cx="160" cy="212" r="2" />
         </g>
 
-        {/* =================================================
-            LOWER MASK
-           ================================================= */}
-
+        {/* LOWER MASK */}
         <path
           d="M122 230 Q160 250 198 230"
           fill="none"
@@ -594,7 +403,6 @@ function HackerMask({ unmasked }) {
         />
 
         {/* Lower vents */}
-
         <g
           className="hx-vents"
           stroke="url(#cyberEdge)"
@@ -605,13 +413,9 @@ function HackerMask({ unmasked }) {
           <path d="M142 247 H178" />
           <path d="M148 255 H172" />
         </g>
-
       </g>
 
-      {/* =====================================================
-          HOOD CIRCUITS
-         ===================================================== */}
-
+      {/* HOOD CIRCUITS */}
       <g
         className="hx-traces"
         fill="none"
@@ -619,88 +423,29 @@ function HackerMask({ unmasked }) {
         strokeWidth="1.2"
         strokeLinecap="round"
       >
-
         <path d="M51 254 H92 L108 270 H132" />
-
         <path d="M269 254 H228 L212 270 H188" />
-
         <path d="M67 287 H110 L123 300" />
-
         <path d="M253 287 H210 L197 300" />
-
         <path d="M48 254 H42" />
-
         <path d="M272 254 H278" />
-
       </g>
 
       {/* Circuit dots */}
-
-      <g
-        fill="#00ff9c"
-        filter="url(#cyberGlow)"
-      >
-        <circle
-          cx="48"
-          cy="254"
-          r="2.5"
-        />
-
-        <circle
-          cx="272"
-          cy="254"
-          r="2.5"
-        />
-
-        <circle
-          cx="67"
-          cy="287"
-          r="2"
-        />
-
-        <circle
-          cx="253"
-          cy="287"
-          r="2"
-        />
+      <g fill="#00ff9c" filter="url(#cyberGlow)">
+        <circle cx="48" cy="254" r="2.5" />
+        <circle cx="272" cy="254" r="2.5" />
+        <circle cx="67" cy="287" r="2" />
+        <circle cx="253" cy="287" r="2" />
       </g>
 
       {/* Floating particles */}
-
       <g fill="#00ff9c">
-        <rect
-          className="hx-p p1"
-          x="34"
-          y="90"
-          width="4"
-          height="4"
-        />
-
-        <rect
-          className="hx-p p2"
-          x="282"
-          y="105"
-          width="4"
-          height="4"
-        />
-
-        <rect
-          className="hx-p p3"
-          x="55"
-          y="220"
-          width="4"
-          height="4"
-        />
-
-        <rect
-          className="hx-p p4"
-          x="265"
-          y="230"
-          width="4"
-          height="4"
-        />
+        <rect className="hx-p p1" x="34" y="90" width="4" height="4" />
+        <rect className="hx-p p2" x="282" y="105" width="4" height="4" />
+        <rect className="hx-p p3" x="55" y="220" width="4" height="4" />
+        <rect className="hx-p p4" x="265" y="230" width="4" height="4" />
       </g>
-
     </svg>
   )
 }
@@ -716,40 +461,24 @@ function Terminal() {
   useEffect(() => {
     let dead = false
 
-    const wait = ms =>
-      new Promise(resolve =>
-        setTimeout(resolve, ms)
-      )
+    const wait = ms => new Promise(resolve => setTimeout(resolve, ms))
 
     ;(async () => {
       while (!dead) {
         setLines([])
 
         for (const step of terminalScript) {
-          for (
-            let i = 1;
-            i <= step.cmd.length;
-            i++
-          ) {
+          for (let i = 1; i <= step.cmd.length; i++) {
             if (dead) return
-
-            setTyping(
-              step.cmd.slice(0, i)
-            )
-
+            setTyping(step.cmd.slice(0, i))
             await wait(55)
           }
 
           await wait(250)
-
           if (dead) return
 
           setTyping('')
-
-          setLines(current => [
-            ...current,
-            step,
-          ])
+          setLines(current => [...current, step])
 
           await wait(700)
         }
@@ -764,33 +493,21 @@ function Terminal() {
   }, [])
 
   return (
-    <div
-      className="hx-term"
-      aria-label="Terminal intro"
-    >
+    <div className="hx-term" aria-label="Terminal intro">
       <div className="hx-term-bar">
         <i />
         <i />
         <i />
-
-        <span>
-          janak@kali:~
-        </span>
+        <span>janak@kali:~</span>
       </div>
 
       <div className="hx-term-body">
-
         {lines.map((line, index) => (
           <div key={index}>
-
             <div>
               <b>$</b> {line.cmd}
             </div>
-
-            <div className="hx-out">
-              {line.out}
-            </div>
-
+            <div className="hx-out">{line.out}</div>
           </div>
         ))}
 
@@ -798,7 +515,6 @@ function Terminal() {
           <b>$</b> {typing}
           <span className="hx-caret" />
         </div>
-
       </div>
     </div>
   )
@@ -808,57 +524,60 @@ function Terminal() {
    HERO
    ========================================================= */
 
+const TRANSITION_MS = 1200 // keep in sync with the 1.2s CSS animations
+
 export default function Hero() {
   const roleRef = useRef(null)
 
-  const [unmasked, setUnmasked] =
-    useState(false)
+  /* masked | unmasking | unmasked | masking */
+  const [phase, setPhase] = useState('masked')
+  const phaseTimer = useRef(null)
+
+  const toggleMask = () => {
+    // ignore clicks while a transition is running
+    if (phase === 'unmasking' || phase === 'masking') return
+
+    const next = phase === 'masked' ? 'unmasking' : 'masking'
+    setPhase(next)
+
+    clearTimeout(phaseTimer.current)
+    phaseTimer.current = setTimeout(
+      () => setPhase(next === 'unmasking' ? 'unmasked' : 'masked'),
+      TRANSITION_MS
+    )
+  }
+
+  useEffect(() => () => clearTimeout(phaseTimer.current), [])
+
+  const isUnmasked = phase === 'unmasking' || phase === 'unmasked'
 
   /* Theme is controlled by Navbar */
-  const [theme, setTheme] =
-    useState(() =>
-      typeof document !== 'undefined'
-        ? document.documentElement.getAttribute(
-            'data-theme'
-          ) || 'dark'
-        : 'dark'
-    )
+  const [theme, setTheme] = useState(() =>
+    typeof document !== 'undefined'
+      ? document.documentElement.getAttribute('data-theme') || 'dark'
+      : 'dark'
+  )
 
-  /* =====================================================
-     THEME SYNC
-     ===================================================== */
-
+  /* THEME SYNC */
   useEffect(() => {
-    const root =
-      document.documentElement
+    const root = document.documentElement
 
     const sync = () => {
-      setTheme(
-        root.getAttribute('data-theme') ===
-          'light'
-          ? 'light'
-          : 'dark'
-      )
+      setTheme(root.getAttribute('data-theme') === 'light' ? 'light' : 'dark')
     }
 
     sync()
 
-    const observer =
-      new MutationObserver(sync)
-
+    const observer = new MutationObserver(sync)
     observer.observe(root, {
       attributes: true,
       attributeFilter: ['data-theme'],
     })
 
-    return () =>
-      observer.disconnect()
+    return () => observer.disconnect()
   }, [])
 
-  /* =====================================================
-     TYPING ROLE
-     ===================================================== */
-
+  /* TYPING ROLE */
   useEffect(() => {
     let index = 0
     let charIndex = 0
@@ -870,131 +589,64 @@ export default function Hero() {
 
       if (!deleting) {
         if (charIndex <= current.length) {
-
           if (roleRef.current) {
-            roleRef.current.textContent =
-              current.slice(0, charIndex++)
+            roleRef.current.textContent = current.slice(0, charIndex++)
           }
-
-          timer = setTimeout(
-            type,
-            60
-          )
-
+          timer = setTimeout(type, 60)
         } else {
-
           deleting = true
-
-          timer = setTimeout(
-            type,
-            1800
-          )
+          timer = setTimeout(type, 1800)
         }
-
       } else if (charIndex > 0) {
-
         if (roleRef.current) {
-          roleRef.current.textContent =
-            current.slice(
-              0,
-              charIndex--
-            )
+          roleRef.current.textContent = current.slice(0, charIndex--)
         }
-
-        timer = setTimeout(
-          type,
-          30
-        )
-
+        timer = setTimeout(type, 30)
       } else {
-
         deleting = false
-
-        index =
-          (index + 1) %
-          roles.length
-
-        timer = setTimeout(
-          type,
-          300
-        )
+        index = (index + 1) % roles.length
+        timer = setTimeout(type, 300)
       }
     }
 
     type()
 
-    return () =>
-      clearTimeout(timer)
+    return () => clearTimeout(timer)
   }, [])
 
-  /* =====================================================
-     SMOOTH SCROLL
-     ===================================================== */
-
+  /* SMOOTH SCROLL */
   const go = id => event => {
     event.preventDefault()
-
-    document
-      .getElementById(id)
-      ?.scrollIntoView({
-        behavior: 'smooth',
-      })
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
   }
 
   return (
-    <section
-      id="home"
-      className="hx"
-      data-theme={theme}
-    >
-
+    <section id="home" className="hx" data-theme={theme}>
       {/* Matrix background */}
-
-      <MatrixRain
-        light={theme === 'light'}
-      />
+      <MatrixRain light={theme === 'light'} />
 
       <div className="hx-vignette" />
-
       <div className="hx-scan" />
 
-      {/* =================================================
-          MAIN CONTENT
-         ================================================= */}
-
+      {/* MAIN CONTENT */}
       <div className="hx-inner">
-
         {/* ================= LEFT ================= */}
-
         <div className="hx-left">
+          <p className="hx-tag">&gt; access granted</p>
 
-          <p className="hx-tag">
-            &gt; access granted
-          </p>
-
-          <h1
-            className="hx-name glitch"
-            data-text="Er. Janak Joshi"
-          >
+          <h1 className="hx-name glitch" data-text="Er. Janak Joshi">
             Er. Janak Joshi
           </h1>
 
           <div className="hx-role">
-
             <span ref={roleRef} />
-
-            <span className="hx-cursor">
-              _
-            </span>
-
+            <span className="hx-cursor">_</span>
           </div>
 
           <Terminal />
 
           {/* Buttons */}
-
           <div className="hx-actions">
-
             <a
               href="#projects"
               onClick={go('projects')}
@@ -1010,16 +662,11 @@ export default function Hero() {
             >
               Get In Touch
             </a>
-
           </div>
 
           {/* Socials */}
-
           <div className="hx-socials">
-
-            <span>
-              Find me on
-            </span>
+            <span>Find me on</span>
 
             {socials.map(social => (
               <a
@@ -1041,1427 +688,809 @@ export default function Hero() {
                 </svg>
               </a>
             ))}
-
           </div>
-
         </div>
 
         {/* ================= RIGHT ================= */}
-
         <div className="hx-right">
-
           <div className="hx-halo" />
 
           <button
-            className="hx-stage"
-            onClick={() =>
-              setUnmasked(value => !value)
-            }
-            aria-pressed={unmasked}
-            aria-label={
-              unmasked
-                ? 'Put the mask back on'
-                : 'Take off the mask'
-            }
+            className={`hx-stage is-${phase}`}
+            onClick={toggleMask}
+            aria-pressed={isUnmasked}
+            aria-label={isUnmasked ? 'Put the mask back on' : 'Take off the mask'}
           >
-
-            <HackerMask
-              unmasked={unmasked}
-            />
+            <HackerMask />
 
             <img
               src="/photo.png"
               alt="Janak Raj Joshi"
-              className={`hx-photo ${
-                unmasked ? 'show' : ''
-              }`}
+              className="hx-photo"
               onError={event => {
-                event.currentTarget.style.display =
-                  'none'
+                event.currentTarget.style.display = 'none'
               }}
             />
 
+            <span className="hx-beam" />
+            <span className="hx-flash" />
           </button>
-
         </div>
-
       </div>
 
-      {/* =================================================
-          STATS
-         ================================================= */}
-
+      {/* STATS */}
       <div className="hx-stats">
-
         {[
-          [
-            'BE Computer',
-            'Khwopa Engineering College',
-          ],
-          [
-            '15+',
-            'Projects Built',
-          ],
-          [
-            '10+',
-            'Certifications',
-          ],
+          ['BE Computer', 'Khwopa Engineering College'],
+          ['15+', 'Projects Built'],
+          ['10+', 'Certifications'],
         ].map(([number, label]) => (
-
-          <div
-            key={label}
-            className="hx-stat"
-          >
-
-            <strong>
-              {number}
-            </strong>
-
-            <span>
-              {label}
-            </span>
-
+          <div key={label} className="hx-stat">
+            <strong>{number}</strong>
+            <span>{label}</span>
           </div>
-
         ))}
-
       </div>
 
-      {/* =================================================
-          STYLES
-         ================================================= */}
-
+      {/* STYLES */}
       <style>{`
 
-        /* =================================================
-           ROOT
-           ================================================= */
+        /* ================= ROOT ================= */
 
         .hx {
           --g: #00ff9c;
           --g-dim: rgba(0, 255, 156, .25);
-
           --ink: #030806;
-
           --panel: rgba(3, 12, 9, .78);
-
           --text: #d7f5e6;
-
           --text-strong: #eafff4;
-
           --muted: rgba(215, 245, 230, .6);
-
           --on-g: #030806;
-
-          --mono:
-            var(
-              --font-mono,
-              'JetBrains Mono',
-              'Fira Code',
-              ui-monospace,
-              monospace
-            );
+          --mono: var(--font-mono, 'JetBrains Mono', 'Fira Code', ui-monospace, monospace);
 
           position: relative;
-
           overflow: hidden;
-
           min-height: 100vh;
-
           display: flex;
-
           flex-direction: column;
-
           align-items: center;
-
           justify-content: center;
-
-          padding:
-            6rem
-            2rem
-            4rem;
-
+          padding: 6rem 2rem 4rem;
           background: var(--ink);
-
           color: var(--text);
-
           font-family: var(--mono);
-
-          transition:
-            background .4s,
-            color .4s;
+          transition: background .4s, color .4s;
         }
 
-        /* =================================================
-           LIGHT THEME
-           ================================================= */
+        /* ================= LIGHT THEME ================= */
 
         .hx[data-theme='light'] {
-
           --g: #008f5a;
-
-          --g-dim:
-            rgba(0, 143, 90, .3);
-
+          --g-dim: rgba(0, 143, 90, .3);
           --ink: #f0faf5;
-
-          --panel:
-            rgba(255, 255, 255, .82);
-
+          --panel: rgba(255, 255, 255, .82);
           --text: #0b2a1e;
-
           --text-strong: #04160f;
-
-          --muted:
-            rgba(11, 42, 30, .65);
-
+          --muted: rgba(11, 42, 30, .65);
           --on-g: #ffffff;
         }
 
-        .hx[data-theme='light']
-        .hx-scan {
-          opacity: .06;
+        .hx[data-theme='light'] .hx-scan { opacity: .06; }
+        .hx[data-theme='light'] .hx-rain { opacity: .3; }
+        .hx[data-theme='light'] .hx-name { text-shadow: none; }
+
+        .hx[data-theme='light'] .hx-halo {
+          background: radial-gradient(circle, rgba(0, 168, 107, .3), transparent 65%);
         }
 
-        .hx[data-theme='light']
-        .hx-rain {
-          opacity: .3;
-        }
-
-        .hx[data-theme='light']
-        .hx-name {
-          text-shadow: none;
-        }
-
-        .hx[data-theme='light']
-        .hx-halo {
-          background:
-            radial-gradient(
-              circle,
-              rgba(0, 168, 107, .3),
-              transparent 65%
-            );
-        }
-
-        .hx[data-theme='light']
-        .hx-mask {
+        .hx[data-theme='light'] .hx-mask {
           filter:
-            drop-shadow(
-              0 6px 14px
-              rgba(0, 60, 40, .35)
-            )
-            drop-shadow(
-              0 0 16px
-              rgba(0, 168, 107, .45)
-            );
+            drop-shadow(0 6px 14px rgba(0, 60, 40, .35))
+            drop-shadow(0 0 16px rgba(0, 168, 107, .45));
         }
 
-        .hx[data-theme='light']
-        .hx-term {
-          box-shadow:
-            0 10px 30px
-            rgba(0, 60, 40, .12);
+        .hx[data-theme='light'] .hx-term {
+          box-shadow: 0 10px 30px rgba(0, 60, 40, .12);
         }
 
-        .hx[data-theme='light']
-        .hx-stat strong {
-          text-shadow: none;
-        }
+        .hx[data-theme='light'] .hx-stat strong { text-shadow: none; }
 
-        /* =================================================
-           MATRIX
-           ================================================= */
+        /* ================= MATRIX ================= */
 
         .hx-rain {
           position: absolute;
-
           inset: 0;
-
           width: 100%;
-
           height: 100%;
-
           opacity: .22;
         }
 
         .hx-vignette {
           position: absolute;
-
           inset: 0;
-
           pointer-events: none;
-
-          background:
-            radial-gradient(
-              ellipse at 70% 45%,
-              transparent 0%,
-              var(--ink) 75%
-            );
+          background: radial-gradient(ellipse at 70% 45%, transparent 0%, var(--ink) 75%);
         }
 
         .hx-scan {
           position: absolute;
-
           inset: 0;
-
           pointer-events: none;
-
           opacity: .35;
-
-          background:
-            repeating-linear-gradient(
-              0deg,
-              rgba(0, 0, 0, .35) 0 1px,
-              transparent 1px 3px
-            );
+          background: repeating-linear-gradient(0deg, rgba(0, 0, 0, .35) 0 1px, transparent 1px 3px);
         }
 
         .hx-scan::after {
           content: '';
-
           position: absolute;
-
           left: 0;
           right: 0;
-
           height: 120px;
-
-          background:
-            linear-gradient(
-              transparent,
-              rgba(0, 255, 156, .07),
-              transparent
-            );
-
-          animation:
-            hxSweep 7s linear infinite;
+          background: linear-gradient(transparent, rgba(0, 255, 156, .07), transparent);
+          animation: hxSweep 7s linear infinite;
         }
 
         @keyframes hxSweep {
-          from {
-            top: -120px;
-          }
-
-          to {
-            top: 100%;
-          }
+          from { top: -120px; }
+          to   { top: 100%; }
         }
 
-        /* =================================================
-           MAIN GRID
-           ================================================= */
+        /* ================= MAIN GRID ================= */
 
         .hx-inner {
           position: relative;
-
           z-index: 1;
-
           width: 100%;
-
           max-width: 1150px;
-
           display: grid;
-
-          grid-template-columns:
-            1fr 380px;
-
+          grid-template-columns: 1fr 380px;
           gap: 3rem;
-
           align-items: center;
         }
 
-        /* =================================================
-           LEFT SIDE
-           ================================================= */
+        /* ================= LEFT SIDE ================= */
 
         .hx-tag {
           color: var(--g);
-
           font-size: .85rem;
-
-          margin:
-            0 0 1rem;
-
+          margin: 0 0 1rem;
           opacity: .85;
         }
 
         .hx-name {
-          font-size:
-            clamp(
-              2.6rem,
-              6vw,
-              4.8rem
-            );
-
+          font-size: clamp(2.6rem, 6vw, 4.8rem);
           font-weight: 800;
-
           line-height: 1.05;
-
           letter-spacing: -.02em;
-
-          margin:
-            0 0 .75rem;
-
-          color:
-            var(--text-strong);
-
+          margin: 0 0 .75rem;
+          color: var(--text-strong);
           position: relative;
-
           width: fit-content;
-
-          text-shadow:
-            0 0 18px
-            rgba(0, 255, 156, .35);
+          text-shadow: 0 0 18px rgba(0, 255, 156, .35);
         }
 
-        /* =================================================
-           GLITCH
-           ================================================= */
+        /* ================= GLITCH ================= */
 
         .glitch::before,
         .glitch::after {
-          content:
-            attr(data-text);
-
+          content: attr(data-text);
           position: absolute;
-
           inset: 0;
-
           overflow: hidden;
         }
 
         .glitch::before {
           color: #ff2e63;
-
-          transform:
-            translate(2px, 0);
-
-          clip-path:
-            inset(
-              0 0 60% 0
-            );
-
-          animation:
-            hxGlitchA
-            4s
-            steps(1)
-            infinite;
-
+          transform: translate(2px, 0);
+          clip-path: inset(0 0 60% 0);
+          animation: hxGlitchA 4s steps(1) infinite;
           mix-blend-mode: screen;
         }
 
         .glitch::after {
           color: #08f7fe;
-
-          transform:
-            translate(-2px, 0);
-
-          clip-path:
-            inset(
-              60% 0 0 0
-            );
-
-          animation:
-            hxGlitchB
-            4s
-            steps(1)
-            infinite;
-
+          transform: translate(-2px, 0);
+          clip-path: inset(60% 0 0 0);
+          animation: hxGlitchB 4s steps(1) infinite;
           mix-blend-mode: screen;
         }
 
         @keyframes hxGlitchA {
-
-          0%,
-          90%,
-          100% {
-            opacity: 0;
-          }
-
-          91% {
-            opacity: 1;
-
-            clip-path:
-              inset(
-                10% 0 55% 0
-              );
-
-            transform:
-              translate(-4px, 0);
-          }
-
-          94% {
-            opacity: 1;
-
-            clip-path:
-              inset(
-                40% 0 30% 0
-              );
-
-            transform:
-              translate(3px, 0);
-          }
-
-          97% {
-            opacity: 0;
-          }
+          0%, 90%, 100% { opacity: 0; }
+          91% { opacity: 1; clip-path: inset(10% 0 55% 0); transform: translate(-4px, 0); }
+          94% { opacity: 1; clip-path: inset(40% 0 30% 0); transform: translate(3px, 0); }
+          97% { opacity: 0; }
         }
 
         @keyframes hxGlitchB {
-
-          0%,
-          91%,
-          100% {
-            opacity: 0;
-          }
-
-          92% {
-            opacity: 1;
-
-            clip-path:
-              inset(
-                55% 0 10% 0
-              );
-
-            transform:
-              translate(4px, 0);
-          }
-
-          95% {
-            opacity: 1;
-
-            clip-path:
-              inset(
-                20% 0 60% 0
-              );
-
-            transform:
-              translate(-3px, 0);
-          }
-
-          98% {
-            opacity: 0;
-          }
+          0%, 91%, 100% { opacity: 0; }
+          92% { opacity: 1; clip-path: inset(55% 0 10% 0); transform: translate(4px, 0); }
+          95% { opacity: 1; clip-path: inset(20% 0 60% 0); transform: translate(-3px, 0); }
+          98% { opacity: 0; }
         }
 
-        /* =================================================
-           ROLE
-           ================================================= */
+        /* ================= ROLE ================= */
 
         .hx-role {
           color: var(--g);
-
-          font-size:
-            clamp(
-              .95rem,
-              2vw,
-              1.25rem
-            );
-
+          font-size: clamp(.95rem, 2vw, 1.25rem);
           min-height: 1.8rem;
-
           margin-bottom: 1.5rem;
         }
 
-        .hx-cursor {
-          animation:
-            hxBlink
-            1s
-            steps(1)
-            infinite;
-        }
+        .hx-cursor { animation: hxBlink 1s steps(1) infinite; }
 
         @keyframes hxBlink {
-          50% {
-            opacity: 0;
-          }
+          50% { opacity: 0; }
         }
 
-        /* =================================================
-           TERMINAL
-           ================================================= */
+        /* ================= TERMINAL ================= */
 
         .hx-term {
           max-width: 500px;
-
-          background:
-            var(--panel);
-
-          border:
-            1px solid
-            var(--g-dim);
-
+          background: var(--panel);
+          border: 1px solid var(--g-dim);
           border-radius: 10px;
-
           box-shadow:
-            0 0 40px
-            rgba(0, 255, 156, .08),
-
-            inset 0 0 30px
-            rgba(0, 255, 156, .04);
-
-          backdrop-filter:
-            blur(4px);
-
-          margin-bottom:
-            1.75rem;
+            0 0 40px rgba(0, 255, 156, .08),
+            inset 0 0 30px rgba(0, 255, 156, .04);
+          backdrop-filter: blur(4px);
+          margin-bottom: 1.75rem;
         }
 
         .hx-term-bar {
           display: flex;
-
           align-items: center;
-
           gap: 6px;
-
-          padding:
-            .55rem
-            .8rem;
-
-          border-bottom:
-            1px solid
-            var(--g-dim);
+          padding: .55rem .8rem;
+          border-bottom: 1px solid var(--g-dim);
         }
 
         .hx-term-bar i {
           width: 9px;
-
           height: 9px;
-
           border-radius: 50%;
-
-          background:
-            #ff5f56;
+          background: #ff5f56;
         }
 
-        .hx-term-bar i:nth-child(2) {
-          background:
-            #ffbd2e;
-        }
-
-        .hx-term-bar i:nth-child(3) {
-          background:
-            #27c93f;
-        }
+        .hx-term-bar i:nth-child(2) { background: #ffbd2e; }
+        .hx-term-bar i:nth-child(3) { background: #27c93f; }
 
         .hx-term-bar span {
           margin-left: .6rem;
-
           font-size: .72rem;
-
-          color:
-            var(--muted);
+          color: var(--muted);
         }
 
         .hx-term-body {
-          padding:
-            .9rem
-            1rem;
-
+          padding: .9rem 1rem;
           font-size: .82rem;
-
           line-height: 1.65;
-
           min-height: 168px;
         }
 
         .hx-term-body b {
           color: var(--g);
-
           font-weight: 700;
-
           margin-right: .4rem;
         }
 
         .hx-out {
-          color:
-            var(--muted);
-
-          padding-left:
-            1.1rem;
+          color: var(--muted);
+          padding-left: 1.1rem;
         }
 
         .hx-caret {
           display: inline-block;
-
           width: 8px;
-
           height: 1em;
-
-          background:
-            var(--g);
-
+          background: var(--g);
           vertical-align: -2px;
-
           margin-left: 2px;
-
-          animation:
-            hxBlink
-            1s
-            steps(1)
-            infinite;
+          animation: hxBlink 1s steps(1) infinite;
         }
 
-        /* =================================================
-           BUTTONS
-           ================================================= */
+        /* ================= BUTTONS ================= */
 
         .hx-actions {
           display: flex;
-
           gap: .75rem;
-
           flex-wrap: wrap;
-
-          margin-bottom:
-            1.75rem;
+          margin-bottom: 1.75rem;
         }
 
         .hx-btn {
-          padding:
-            .8rem
-            1.5rem;
-
+          padding: .8rem 1.5rem;
           border-radius: 6px;
-
-          font:
-            600
-            .88rem
-            var(--mono);
-
+          font: 600 .88rem var(--mono);
           text-decoration: none;
-
           transition: .2s;
         }
 
         .hx-btn-solid {
-          background:
-            var(--g);
-
-          color:
-            var(--on-g);
-
-          box-shadow:
-            0 0 22px
-            rgba(0, 255, 156, .4);
+          background: var(--g);
+          color: var(--on-g);
+          box-shadow: 0 0 22px rgba(0, 255, 156, .4);
         }
 
         .hx-btn-solid:hover {
-          transform:
-            translateY(-2px);
-
-          box-shadow:
-            0 0 36px
-            rgba(0, 255, 156, .65);
+          transform: translateY(-2px);
+          box-shadow: 0 0 36px rgba(0, 255, 156, .65);
         }
 
         .hx-btn-ghost {
-          border:
-            1px solid
-            var(--g);
-
-          color:
-            var(--g);
+          border: 1px solid var(--g);
+          color: var(--g);
         }
 
-        .hx-btn-ghost:hover {
-          background:
-            rgba(0, 255, 156, .1);
-        }
+        .hx-btn-ghost:hover { background: rgba(0, 255, 156, .1); }
 
-        /* =================================================
-           SOCIALS
-           ================================================= */
+        /* ================= SOCIALS ================= */
 
         .hx-socials {
           display: flex;
-
           align-items: center;
-
           gap: .6rem;
-
           font-size: .75rem;
-
-          color:
-            var(--muted);
+          color: var(--muted);
         }
 
-        .hx-socials span {
-          margin-right: .4rem;
-        }
+        .hx-socials span { margin-right: .4rem; }
 
         .hx-social {
           width: 40px;
-
           height: 40px;
-
           display: grid;
-
           place-items: center;
-
           border-radius: 8px;
-
-          color:
-            var(--muted);
-
-          border:
-            1px solid
-            var(--g-dim);
-
-          background:
-            var(--panel);
-
+          color: var(--muted);
+          border: 1px solid var(--g-dim);
+          background: var(--panel);
           transition: .2s;
         }
 
         .hx-social:hover {
-          color:
-            var(--g);
-
-          border-color:
-            var(--g);
-
-          box-shadow:
-            0 0 18px
-            rgba(0, 255, 156, .35);
-
-          transform:
-            translateY(-3px);
+          color: var(--g);
+          border-color: var(--g);
+          box-shadow: 0 0 18px rgba(0, 255, 156, .35);
+          transform: translateY(-3px);
         }
 
-        /* =================================================
-           CYBER MASK AREA
-           ================================================= */
+        /* ================= CYBER MASK AREA ================= */
 
         .hx-right {
           position: relative;
-
           display: flex;
-
           flex-direction: column;
-
           align-items: center;
         }
 
         .hx-halo {
           position: absolute;
-
           width: 360px;
-
           height: 360px;
-
           top: 5px;
-
           border-radius: 50%;
-
-          background:
-            radial-gradient(
-              circle,
-              rgba(0, 255, 156, .24),
-              rgba(34, 211, 238, .08) 35%,
-              transparent 70%
-            );
-
-          filter:
-            blur(28px);
-
-          animation:
-            hxPulse
-            4s
-            ease-in-out
-            infinite;
+          background: radial-gradient(
+            circle,
+            rgba(0, 255, 156, .24),
+            rgba(34, 211, 238, .08) 35%,
+            transparent 70%
+          );
+          filter: blur(28px);
+          animation: hxPulse 4s ease-in-out infinite;
         }
 
         @keyframes hxPulse {
-          50% {
-            opacity: .55;
-
-            transform:
-              scale(1.08);
-          }
+          50% { opacity: .55; transform: scale(1.08); }
         }
 
-        /* =================================================
-           MASK STAGE
-           ================================================= */
+        /* ================= MASK STAGE ================= */
 
         .hx-stage {
           position: relative;
-
           width: 330px;
-
           height: 370px;
-
-          background:
-            transparent;
-
+          background: transparent;
           border: 0;
-
           padding: 0;
-
           cursor: pointer;
-
-          animation:
-            hxHover
-            6s
-            ease-in-out
-            infinite;
+          overflow: visible;
+          animation: hxHover 6s ease-in-out infinite;
         }
 
         @keyframes hxHover {
-          50% {
-            transform:
-              translateY(-10px);
-          }
+          50% { transform: translateY(-10px); }
         }
 
-        /* =================================================
-           MASK
-           ================================================= */
+        /* ================= MASK ================= */
 
         .hx-mask {
           width: 100%;
-
           height: 100%;
-
           overflow: visible;
-
           filter:
-            drop-shadow(
-              0 0 8px
-              rgba(0, 255, 156, .8)
-            )
-
-            drop-shadow(
-              0 0 22px
-              rgba(0, 255, 156, .35)
-            )
-
-            drop-shadow(
-              0 0 45px
-              rgba(34, 211, 238, .15)
-            );
-
-          transition:
-            opacity .5s ease,
-            transform .5s ease;
+            drop-shadow(0 0 8px rgba(0, 255, 156, .8))
+            drop-shadow(0 0 22px rgba(0, 255, 156, .35))
+            drop-shadow(0 0 45px rgba(34, 211, 238, .15));
         }
 
-        .hx-mask.is-off {
-          opacity: 0;
+        /* ================= FACE FLICKER ================= */
 
-          transform:
-            scale(.88);
-        }
-
-        /* =================================================
-           FACE FLICKER
-           ================================================= */
-
-        .hx-face {
-          animation:
-            hxFlicker
-            7s
-            infinite;
-        }
+        .hx-face { animation: hxFlicker 7s infinite; }
 
         @keyframes hxFlicker {
-
-          0%,
-          92%,
-          100% {
-            opacity: 1;
-          }
-
-          93% {
-            opacity: .65;
-          }
-
-          94% {
-            opacity: 1;
-          }
-
-          96% {
-            opacity: .75;
-          }
-
-          97% {
-            opacity: 1;
-          }
+          0%, 92%, 100% { opacity: 1; }
+          93% { opacity: .65; }
+          94% { opacity: 1; }
+          96% { opacity: .75; }
+          97% { opacity: 1; }
         }
 
-        /* =================================================
-           EYES
-           ================================================= */
+        /* ================= EYES ================= */
 
-        .hx-eyes {
-          transition:
-            transform .12s ease-out;
-        }
+        .hx-eyes { transition: transform .12s ease-out; }
 
         .hx-eyes path {
           filter:
-            drop-shadow(
-              0 0 4px
-              #00ff9c
-            )
-
-            drop-shadow(
-              0 0 10px
-              rgba(34, 211, 238, .8)
-            );
+            drop-shadow(0 0 4px #00ff9c)
+            drop-shadow(0 0 10px rgba(34, 211, 238, .8));
         }
 
-        /* =================================================
-           SCAN BEAM
-           ================================================= */
+        /* ================= SCAN BEAM (inside mask) ================= */
 
-        .hx-sweep {
-          animation:
-            hxScan
-            2.8s
-            ease-in-out
-            infinite
-            alternate;
-        }
+        .hx-sweep { animation: hxScan 2.8s ease-in-out infinite alternate; }
 
         @keyframes hxScan {
-          from {
-            transform:
-              translateX(0);
-          }
-
-          to {
-            transform:
-              translateX(150px);
-          }
+          from { transform: translateX(0); }
+          to   { transform: translateX(150px); }
         }
 
-        /* =================================================
-           FOREHEAD SYMBOL
-           ================================================= */
+        /* ================= FOREHEAD SYMBOL ================= */
 
-        .hx-gem {
-          animation:
-            hxGem
-            3s
-            ease-in-out
-            infinite;
-        }
+        .hx-gem { animation: hxGem 3s ease-in-out infinite; }
 
         @keyframes hxGem {
-          50% {
-            opacity: .35;
-          }
+          50% { opacity: .35; }
         }
 
-        /* =================================================
-           VENTS
-           ================================================= */
+        /* ================= VENTS ================= */
 
-        .hx-vents {
-          animation:
-            hxVent
-            2.4s
-            ease-in-out
-            infinite;
-        }
+        .hx-vents { animation: hxVent 2.4s ease-in-out infinite; }
 
         @keyframes hxVent {
-          50% {
-            opacity: .35;
-          }
+          50% { opacity: .35; }
         }
 
-        /* =================================================
-           CIRCUITS
-           ================================================= */
+        /* ================= CIRCUITS ================= */
 
         .hx-traces path {
-          stroke-dasharray:
-            5 8;
-
-          animation:
-            hxFlow
-            2.5s
-            linear
-            infinite;
+          stroke-dasharray: 5 8;
+          animation: hxFlow 2.5s linear infinite;
         }
 
         @keyframes hxFlow {
-          to {
-            stroke-dashoffset:
-              -30;
-          }
+          to { stroke-dashoffset: -30; }
         }
 
-        .hx-face-lines {
-          animation:
-            hxCircuit
-            3s
-            ease-in-out
-            infinite;
-        }
+        .hx-face-lines { animation: hxCircuit 3s ease-in-out infinite; }
 
         @keyframes hxCircuit {
-          50% {
-            opacity: .35;
-          }
+          50% { opacity: .35; }
         }
 
-        /* =================================================
-           ORBIT RINGS
-           ================================================= */
+        /* ================= ORBIT RINGS ================= */
 
         .hx-ring {
-          transform-box:
-            fill-box;
-
-          transform-origin:
-            center;
-
-          animation:
-            hxSpin
-            42s
-            linear
-            infinite;
+          transform-box: fill-box;
+          transform-origin: center;
+          animation: hxSpin 42s linear infinite;
         }
 
         .hx-ring.r2 {
-          animation-duration:
-            27s;
-
-          animation-direction:
-            reverse;
+          animation-duration: 27s;
+          animation-direction: reverse;
         }
 
         @keyframes hxSpin {
-          to {
-            transform:
-              rotate(360deg);
-          }
+          to { transform: rotate(360deg); }
         }
 
-        /* =================================================
-           FLOATING PARTICLES
-           ================================================= */
+        /* ================= FLOATING PARTICLES ================= */
 
         .hx-p {
           opacity: 0;
-
-          animation:
-            hxDrift
-            5s
-            ease-in-out
-            infinite;
+          animation: hxDrift 5s ease-in-out infinite;
         }
 
-        .hx-p.p2 {
-          animation-delay: 1s;
-        }
-
-        .hx-p.p3 {
-          animation-delay: 2s;
-        }
-
-        .hx-p.p4 {
-          animation-delay: 3s;
-        }
+        .hx-p.p2 { animation-delay: 1s; }
+        .hx-p.p3 { animation-delay: 2s; }
+        .hx-p.p4 { animation-delay: 3s; }
 
         @keyframes hxDrift {
-
-          0% {
-            opacity: 0;
-
-            transform:
-              translateY(8px);
-          }
-
-          40% {
-            opacity: .9;
-          }
-
-          100% {
-            opacity: 0;
-
-            transform:
-              translateY(-25px);
-          }
+          0%   { opacity: 0; transform: translateY(8px); }
+          40%  { opacity: .9; }
+          100% { opacity: 0; transform: translateY(-25px); }
         }
 
-        /* =================================================
-           PHOTO REVEAL
-           ================================================= */
+        /* ================= PHOTO ================= */
 
         .hx-photo {
           position: absolute;
-
           left: 50%;
-
           top: 46%;
-
           width: 280px;
-
           height: 280px;
-
           border-radius: 50%;
-
           object-fit: cover;
-
-          object-position:
-            center top;
-
-          transform:
-            translate(-50%, -50%)
-            scale(.82);
-
+          object-position: center top;
+          transform: translate(-50%, -50%) scale(.82);
           opacity: 0;
-
-          transition:
-            opacity .5s ease,
-            transform .5s ease;
-
-          border:
-            2px solid
-            var(--g);
-
+          border: 2px solid var(--g);
           box-shadow:
-            0 0 25px
-            rgba(0, 255, 156, .4),
-
-            0 0 60px
-            rgba(0, 255, 156, .15);
+            0 0 25px rgba(0, 255, 156, .4),
+            0 0 60px rgba(0, 255, 156, .15);
         }
 
-        .hx-photo.show {
+        /* ================= UNMASK / MASK TRANSITIONS ================= */
+
+        /* resting states */
+        .hx-stage.is-masked .hx-photo { opacity: 0; }
+
+        .hx-stage.is-unmasked .hx-mask {
+          opacity: 0;
+          pointer-events: none;
+        }
+
+        .hx-stage.is-unmasked .hx-photo {
           opacity: 1;
-
-          transform:
-            translate(-50%, -50%)
-            scale(1);
+          transform: translate(-50%, -50%) scale(1);
         }
 
-        /* =================================================
-           STATS
-           ================================================= */
+        /* scan beam */
+        .hx-beam {
+          position: absolute;
+          left: -6%;
+          right: -6%;
+          top: 0;
+          height: 3px;
+          opacity: 0;
+          pointer-events: none;
+          background: linear-gradient(90deg, transparent, var(--g), #22d3ee, var(--g), transparent);
+          box-shadow: 0 0 14px var(--g), 0 0 34px var(--g);
+        }
+
+        /* flash burst */
+        .hx-flash {
+          position: absolute;
+          inset: 8%;
+          border-radius: 50%;
+          opacity: 0;
+          pointer-events: none;
+          background: radial-gradient(circle, rgba(0, 255, 156, .55), transparent 65%);
+        }
+
+        /* ---------- UNMASKING ---------- */
+
+        .hx-stage.is-unmasking .hx-mask  { animation: hxMaskOff 1.2s ease-in forwards; }
+        .hx-stage.is-unmasking .hx-photo { animation: hxPhotoIn 1.2s ease-out forwards; }
+        .hx-stage.is-unmasking .hx-beam  { animation: hxBeamDown 1.2s linear forwards; }
+
+        @keyframes hxMaskOff {
+          0%   { clip-path: inset(0 0 0 0); opacity: 1; transform: none; }
+          10%  { transform: translate(-5px, 0) skewX(4deg); }
+          20%  { transform: translate(6px, 0) skewX(-4deg); opacity: .7; }
+          30%  { transform: translate(-3px, 0); opacity: 1; }
+          40%  { transform: none; }
+          100% { clip-path: inset(100% 0 0 0); opacity: .2; transform: scale(1.05); }
+        }
+
+        @keyframes hxPhotoIn {
+          0% {
+            opacity: 1;
+            clip-path: inset(0 0 100% 0);
+            transform: translate(-50%, -50%) scale(.9);
+            filter: hue-rotate(90deg) saturate(2.5) brightness(1.5);
+          }
+          50% {
+            transform: translate(-48%, -50%) scale(.96);
+            filter: hue-rotate(-50deg) saturate(2) brightness(1.2);
+          }
+          70% {
+            transform: translate(-52%, -50%) scale(.99);
+          }
+          100% {
+            opacity: 1;
+            clip-path: inset(0 0 0 0);
+            transform: translate(-50%, -50%) scale(1);
+            filter: none;
+          }
+        }
+
+        @keyframes hxBeamDown {
+          0%   { top: 0;    opacity: 0; }
+          8%   { opacity: 1; }
+          92%  { opacity: 1; }
+          100% { top: 100%; opacity: 0; }
+        }
+
+        /* ---------- MASKING ---------- */
+
+        .hx-stage.is-masking .hx-mask  { animation: hxMaskOn 1.2s ease-out forwards; }
+        .hx-stage.is-masking .hx-photo { animation: hxPhotoOut 1.2s ease-in forwards; }
+        .hx-stage.is-masking .hx-beam  { animation: hxBeamUp 1.2s linear forwards; }
+        .hx-stage.is-masking .hx-flash { animation: hxFlash 1.2s ease-out forwards; }
+
+        @keyframes hxMaskOn {
+          0% {
+            opacity: 1;
+            clip-path: inset(100% 0 0 0);
+            transform: scale(1.05);
+            filter: brightness(2) hue-rotate(40deg);
+          }
+          70% {
+            clip-path: inset(0 0 0 0);
+            transform: scale(1.05) translate(4px, 0);
+          }
+          85% {
+            transform: scale(.97) translate(-3px, 0);
+            filter: brightness(1.6);
+          }
+          100% {
+            opacity: 1;
+            clip-path: inset(0 0 0 0);
+            transform: scale(1);
+            filter: none;
+          }
+        }
+
+        @keyframes hxPhotoOut {
+          0% {
+            opacity: 1;
+            clip-path: inset(0 0 0 0);
+            transform: translate(-50%, -50%) scale(1);
+          }
+          40% {
+            transform: translate(-52%, -50%) scale(.98);
+            filter: hue-rotate(80deg) saturate(2.5) brightness(1.4);
+          }
+          70% {
+            transform: translate(-48%, -50%) scale(.95);
+          }
+          100% {
+            opacity: 1;
+            clip-path: inset(0 0 100% 0);
+            transform: translate(-50%, -50%) scale(.9);
+            filter: hue-rotate(-60deg) brightness(1.5);
+          }
+        }
+
+        @keyframes hxBeamUp {
+          0%   { top: 100%; opacity: 0; }
+          8%   { opacity: 1; }
+          92%  { opacity: 1; }
+          100% { top: 0;    opacity: 0; }
+        }
+
+        @keyframes hxFlash {
+          0%, 70% { opacity: 0; transform: scale(.7); }
+          85%     { opacity: 1; transform: scale(1); }
+          100%    { opacity: 0; transform: scale(1.3); }
+        }
+
+        /* ================= STATS ================= */
 
         .hx-stats {
           position: relative;
-
           z-index: 1;
-
           display: flex;
-
           flex-wrap: wrap;
-
           width: 100%;
-
           max-width: 1150px;
-
-          margin-top:
-            3.5rem;
-
-          border:
-            1px solid
-            var(--g-dim);
-
+          margin-top: 3.5rem;
+          border: 1px solid var(--g-dim);
           border-radius: 10px;
-
-          background:
-            var(--panel);
-
+          background: var(--panel);
           overflow: hidden;
         }
 
         .hx-stat {
           flex: 1;
-
           min-width: 140px;
-
-          padding:
-            1.1rem
-            1rem;
-
+          padding: 1.1rem 1rem;
           text-align: center;
-
-          border-right:
-            1px solid
-            var(--g-dim);
+          border-right: 1px solid var(--g-dim);
         }
 
-        .hx-stat:last-child {
-          border-right: 0;
-        }
+        .hx-stat:last-child { border-right: 0; }
 
         .hx-stat strong {
           display: block;
-
-          color:
-            var(--g);
-
-          font-size:
-            1.5rem;
-
-          text-shadow:
-            0 0 14px
-            rgba(0, 255, 156, .5);
+          color: var(--g);
+          font-size: 1.5rem;
+          text-shadow: 0 0 14px rgba(0, 255, 156, .5);
         }
 
         .hx-stat span {
           font-size: .72rem;
-
-          color:
-            var(--muted);
+          color: var(--muted);
         }
 
-        /* =================================================
-           FOCUS STATES
-           ================================================= */
+        /* ================= FOCUS STATES ================= */
 
         .hx-btn:focus-visible,
         .hx-social:focus-visible,
         .hx-stage:focus-visible {
-          outline:
-            2px solid #fff;
-
+          outline: 2px solid #fff;
           outline-offset: 3px;
         }
 
-        /* =================================================
-           TABLET
-           ================================================= */
+        /* ================= TABLET ================= */
 
         @media (max-width: 960px) {
-
           .hx-inner {
             grid-template-columns: 1fr;
-
             gap: 2.5rem;
           }
 
-          .hx-right {
-            order: -1;
-          }
+          .hx-right { order: -1; }
 
           .hx-left {
             align-items: center;
-
             text-align: center;
-
             display: flex;
-
             flex-direction: column;
           }
 
           .hx-actions,
-          .hx-socials {
-            justify-content: center;
-          }
+          .hx-socials { justify-content: center; }
 
-          .hx-stage {
-            width: 250px;
-
-            height: 285px;
-          }
-
-          .hx-halo {
-            width: 280px;
-
-            height: 280px;
-          }
-
-          .hx-photo {
-            width: 190px;
-
-            height: 190px;
-          }
-
+          .hx-stage { width: 250px; height: 285px; }
+          .hx-halo  { width: 280px; height: 280px; }
+          .hx-photo { width: 190px; height: 190px; }
         }
 
-        /* =================================================
-           MOBILE
-           ================================================= */
+        /* ================= MOBILE ================= */
 
         @media (max-width: 500px) {
+          .hx { padding: 5rem 1rem 3rem; }
 
-          .hx {
-            padding:
-              5rem
-              1rem
-              3rem;
-          }
+          .hx-name { font-size: clamp(2.1rem, 12vw, 3.2rem); }
 
-          .hx-name {
-            font-size:
-              clamp(
-                2.1rem,
-                12vw,
-                3.2rem
-              );
-          }
+          .hx-term { width: 100%; }
+          .hx-term-body { font-size: .72rem; }
 
-          .hx-term {
-            width: 100%;
-          }
+          .hx-stage { width: 220px; height: 255px; }
+          .hx-halo  { width: 240px; height: 240px; }
+          .hx-photo { width: 165px; height: 165px; }
 
-          .hx-term-body {
-            font-size: .72rem;
-          }
-
-          .hx-stage {
-            width: 220px;
-
-            height: 255px;
-          }
-
-          .hx-halo {
-            width: 240px;
-
-            height: 240px;
-          }
-
-          .hx-photo {
-            width: 165px;
-
-            height: 165px;
-          }
-
-          .hx-stats {
-            flex-direction: column;
-          }
+          .hx-stats { flex-direction: column; }
 
           .hx-stat {
             border-right: 0;
-
-            border-bottom:
-              1px solid
-              var(--g-dim);
+            border-bottom: 1px solid var(--g-dim);
           }
 
-          .hx-stat:last-child {
-            border-bottom: 0;
-          }
-
+          .hx-stat:last-child { border-bottom: 0; }
         }
 
-        /* =================================================
-           REDUCED MOTION
-           ================================================= */
+        /* ================= REDUCED MOTION ================= */
 
         @media (prefers-reduced-motion: reduce) {
-
           .hx *,
           .hx *::before,
           .hx *::after {
             animation: none !important;
-
             transition: none !important;
           }
 
+          /* skip straight to the result */
+          .hx-stage.is-unmasking .hx-mask  { opacity: 0; }
+          .hx-stage.is-unmasking .hx-photo { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+          .hx-stage.is-masking .hx-photo   { opacity: 0; }
         }
 
       `}</style>
-
     </section>
   )
 }
