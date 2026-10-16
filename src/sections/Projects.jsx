@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 const GitHubIcon = () => (
   <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
@@ -16,15 +16,15 @@ const LiveIcon = () => (
 
 const projects = [
   {
-  title: 'RankUp Nepal',
-  category: 'Full Stack Web Development',
-  color: 'var(--accent2)',
-  tags: ['React.js', 'Node.js', 'Express.js', 'PostgreSQL'],
-  desc: 'A full-stack online exam preparation platform for Loksewa and competitive exams. Features practice tests, mock exams, study materials, user authentication, progress tracking, and an admin dashboard for managing questions and content.',
-  icon: '📚',
-  live: 'https://rankupnepal.com/', 
-  // github: 'https://github.com/Janak-Joshi6789/rankup-nepal.git',
-},
+    title: 'RankUp Nepal',
+    category: 'Full Stack Web Development',
+    color: 'var(--accent2)',
+    tags: ['React.js', 'Node.js', 'Express.js', 'PostgreSQL'],
+    desc: 'A full-stack online exam preparation platform for Loksewa and competitive exams. Features practice tests, mock exams, study materials, user authentication, progress tracking, and an admin dashboard for managing questions and content.',
+    icon: '📚',
+    live: 'https://rankupnepal.com/',
+    // github: 'https://github.com/Janak-Joshi6789/rankup-nepal.git',
+  },
   {
     title: 'EV Fast Energy Website',
     category: 'Web Development',
@@ -32,21 +32,20 @@ const projects = [
     tags: ['React.js', 'Tailwind CSS', 'Responsive'],
     desc: "Nepal's leading EV fast charging solutions provider website. Features product listings, solutions, services, and a full responsive layout built with Next.js.",
     icon: '⚡',
-   live: 'https://evfastenergy.com/', 
-  //  github: 'https://github.com/Janak-Joshi6789/evfastenergy.git',
-    
+    live: 'https://evfastenergy.com/',
+    // github: 'https://github.com/Janak-Joshi6789/evfastenergy.git',
   },
   {
-  title: 'Tour & Travels Website',
-  category: 'Web Development',
-  color: 'var(--accent2)',
-  tags: ['React.js', 'Tailwind CSS', 'Responsive'],
-  desc: 'A modern and responsive tour and travel website featuring destination showcases, tour packages, travel services, booking-oriented pages, and an engaging user experience with a clean, mobile-friendly interface.',
-  icon: '✈️',
-  live: 'https://tour-travel-project-seven.vercel.app/',
-  github: 'https://github.com/Janak-Joshi6789/Tour-and-Travels.git',
-},
-   {
+    title: 'Tour & Travels Website',
+    category: 'Web Development',
+    color: 'var(--accent2)',
+    tags: ['React.js', 'Tailwind CSS', 'Responsive'],
+    desc: 'A modern and responsive tour and travel website featuring destination showcases, tour packages, travel services, booking-oriented pages, and an engaging user experience with a clean, mobile-friendly interface.',
+    icon: '✈️',
+    live: 'https://tour-travel-project-seven.vercel.app/',
+    github: 'https://github.com/Janak-Joshi6789/Tour-and-Travels.git',
+  },
+  {
     title: 'Mobile E-Commerce Website',
     category: 'Web Development',
     color: 'var(--accent2)',
@@ -57,15 +56,15 @@ const projects = [
     live: null,
   },
   {
-  title: 'Cricket Association of Nepal Website',
-  category: 'Web Development',
-  color: 'var(--accent2)',
-  tags: ['HTML', 'CSS', 'JavaScript', 'Bootstrap'],
-  desc: 'Official-style website developed for the Cricket Association of Nepal (CAN)featuring player profiles, team information, match schedules and tournament updates.',
-  icon: '🏏',
-  github: 'https://github.com/Janak-Joshi6789/Cricket-Association-of-Nepal-Website',
-  live: null,
-},
+    title: 'Cricket Association of Nepal Website',
+    category: 'Web Development',
+    color: 'var(--accent2)',
+    tags: ['HTML', 'CSS', 'JavaScript', 'Bootstrap'],
+    desc: 'Official-style website developed for the Cricket Association of Nepal (CAN) featuring player profiles, team information, match schedules and tournament updates.',
+    icon: '🏏',
+    github: 'https://github.com/Janak-Joshi6789/Cricket-Association-of-Nepal-Website',
+    live: null,
+  },
   {
     title: 'Hospital Management System',
     category: 'Web Development',
@@ -76,17 +75,9 @@ const projects = [
     github: 'https://github.com/Janak-Joshi6789/Hospital-website',
     live: null,
   },
- 
-  // {
-  //   title: 'Mobile Store',
-  //   category: 'Web Development',
-  //   color: 'var(--accent2)',
-  //   tags: ['JavaScript', 'HTML', 'CSS', 'Frontend'],
+  // { title: 'Mobile Store', category: 'Web Development', color: 'var(--accent2)', tags: ['JavaScript', 'HTML', 'CSS', 'Frontend'],
   //   desc: 'Frontend mobile store website with product display, filtering, and interactive UI built with vanilla JavaScript and modern CSS layouts.',
-  //   icon: '📱',
-  //   github: 'https://github.com/Janak-Joshi6789/mobile-store-',
-  //   live: null,
-  // },
+  //   icon: '📱', github: 'https://github.com/Janak-Joshi6789/mobile-store-', live: null },
   {
     title: 'Food Ordering Website',
     category: 'Web Development',
@@ -107,7 +98,6 @@ const projects = [
     github: 'https://github.com/Janak-Joshi6789/giftshop-website-using-wordpress',
     live: null,
   },
-  
   {
     title: 'CCNA Networking Labs',
     category: 'Networking',
@@ -118,20 +108,14 @@ const projects = [
     github: 'https://github.com/Janak-Joshi6789/CCNA',
     live: null,
   },
-  // {
-  //   title: 'Cybersecurity Labs',
-  //   category: 'Cybersecurity',
-  //   color: 'var(--accent)',
+  // { title: 'Cybersecurity Labs', category: 'Cybersecurity', color: 'var(--accent)',
   //   tags: ['Penetration Testing', 'Nmap', 'Wireshark', 'Log Analysis', 'Encryption'],
   //   desc: 'Hands-on security labs including network scanning and enumeration, packet capture analysis, basic exploitation techniques, encryption/decryption, and incident log review using Wazuh.',
-  //   icon: '🛡️',
-  //   github: null,
-  //   live: null,
-  // },
+  //   icon: '🛡️', github: null, live: null },
   {
     title: 'Nepali Speech-to-Text',
     category: 'AI / ML',
-    color: '#fb923c',
+    color: 'var(--warn)',
     tags: ['Python', 'wav2vec2', 'NLP', 'Deep Learning'],
     desc: "AI system that transcribes spoken Nepali language into text using Facebook's wav2vec2 architecture, fine-tuned on Nepali audio datasets for accurate local language recognition.",
     icon: '🎙️',
@@ -141,7 +125,7 @@ const projects = [
   {
     title: 'Nepali Text-to-Speech',
     category: 'AI / ML',
-    color: '#fb923c',
+    color: 'var(--warn)',
     tags: ['Python', 'Tacotron', 'TTS', 'Deep Learning'],
     desc: 'Neural text-to-speech synthesis for the Nepali language using Tacotron architecture, generating natural-sounding Nepali audio from written text input.',
     icon: '🔊',
@@ -152,7 +136,25 @@ const projects = [
 
 const cats = ['All', 'Web Development', 'Networking', 'AI / ML']
 
+// Reveals the section once when it scrolls into view
+function useReveal() {
+  const ref = useRef(null)
+  const [shown, setShown] = useState(false)
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    if (!('IntersectionObserver' in window)) { setShown(true); return }
+    const io = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting) { setShown(true); io.disconnect() }
+    }, { threshold: 0.08 })
+    io.observe(el)
+    return () => io.disconnect()
+  }, [])
+  return [ref, shown]
+}
+
 export default function Projects() {
+  const [ref, shown] = useReveal()
   const [filter, setFilter] = useState('All')
   const [showAll, setShowAll] = useState(false)
   const allFiltered = filter === 'All' ? projects : projects.filter(p => p.category === filter)
@@ -160,19 +162,21 @@ export default function Projects() {
   const hasMore = allFiltered.length > 6
 
   return (
-    <section id="projects" className="section projects">
+    <section id="projects" ref={ref} className={`section projects${shown ? ' in' : ''}`}>
       <div className="container">
-        <div className="section-label">
+        <div className="section-label rv">
           <span className="label-line" />
-          <span className="font-mono text-primary text-sm">Projects</span>
+          <span className="font-mono text-primary text-sm">&gt; ls ~/projects</span>
         </div>
-        <h2 className="section-title">What <span className="text-primary">I've Built</span></h2>
-        <p className="section-sub">Projects spanning networking labs, security research, and full-stack web applications</p>
+        <h2 className="section-title rv" style={{ '--i': 1 }}>What <span className="text-primary">I've Built</span></h2>
+        <p className="section-sub rv" style={{ '--i': 2 }}>Projects spanning networking labs, security research, and full-stack web applications</p>
 
-        <div className="filter-tabs">
+        <div className="filter-tabs rv" style={{ '--i': 3 }} role="tablist" aria-label="Filter projects">
           {cats.map(c => (
             <button
               key={c}
+              role="tab"
+              aria-selected={filter === c}
               className={`filter-tab${filter === c ? ' active' : ''}`}
               onClick={() => { setFilter(c); setShowAll(false) }}
             >
@@ -182,11 +186,11 @@ export default function Projects() {
         </div>
 
         <div className="projects-grid">
-          {filtered.map(p => (
-            <div key={p.title} className="project-card">
+          {filtered.map((p, i) => (
+            <div key={p.title} className="project-card rv" style={{ '--c': p.color, '--i': i % 3 + 3 }}>
               <div className="project-top">
                 <div className="project-icon">{p.icon}</div>
-                <span className="project-cat" style={{color: p.color, borderColor: p.color}}>{p.category}</span>
+                <span className="project-cat">{p.category}</span>
               </div>
 
               <h3 className="project-title">{p.title}</h3>
@@ -199,7 +203,7 @@ export default function Projects() {
               {(p.github || p.live) && (
                 <div className="project-links">
                   {p.live && (
-                    <a href={p.live} target="_blank" rel="noreferrer" className="proj-link live-link" style={{borderColor: p.color, color: p.color}}>
+                    <a href={p.live} target="_blank" rel="noreferrer" className="proj-link live-link">
                       <LiveIcon /> Live Site
                     </a>
                   )}
@@ -208,7 +212,6 @@ export default function Projects() {
                       <GitHubIcon /> GitHub
                     </a>
                   )}
-                  
                 </div>
               )}
             </div>
@@ -216,125 +219,78 @@ export default function Projects() {
         </div>
 
         {hasMore && (
-          <div className="show-more-wrap">
-            <button className="show-more-btn" onClick={() => setShowAll(!showAll)}>
-              {showAll ? (
-                <><span>Show Less</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="18 15 12 9 6 15"/></svg></>
-              ) : (
-                <><span>See More ({allFiltered.length - 6} more)</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="6 9 12 15 18 9"/></svg></>
-              )}
+          <div className="show-more-wrap rv">
+            <button className="show-more-btn" onClick={() => setShowAll(!showAll)} aria-expanded={showAll}>
+              {showAll ? '$ show --less' : `$ show --more (+${allFiltered.length - 6})`}
             </button>
           </div>
         )}
       </div>
 
       <style>{`
-        .text-primary { color: var(--primary); }
-        .section-sub { color: var(--muted); font-size: 0.9rem; margin-top: 0.4rem; }
+        /* ---- Hacker theme, scoped to this section (dark / light follows html[data-theme]) ---- */
+        .projects {
+          --hx: #00ff9c; --hx-dim: rgba(0,255,156,.25); --hx-bg: #030806; --hx-panel: rgba(3,12,9,.78);
+          --hx-text: #d7f5e6; --hx-muted: rgba(215,245,230,.66); --hx-input: rgba(0,0,0,.4);
+          --primary: var(--hx); --accent: #22d3ee; --accent2: #fbbf24; --warn: #ff6b6b; --violet: #a78bfa;
+          --text: var(--hx-text); --muted: var(--hx-muted); --card: var(--hx-panel); --border: var(--hx-dim);
+          position: relative; color: var(--text);
+          background-color: var(--hx-bg);
+          background-image: linear-gradient(var(--hx-dim) 1px, transparent 1px), linear-gradient(90deg, var(--hx-dim) 1px, transparent 1px);
+          background-size: 60px 60px; background-blend-mode: soft-light;
+          font-family: var(--font-mono, 'JetBrains Mono', ui-monospace, monospace);
+        }
+        :root[data-theme='light'] .projects {
+          --hx: #008f5a; --hx-dim: rgba(0,143,90,.22); --hx-bg: #f0faf5; --hx-panel: rgba(255,255,255,.85);
+          --hx-text: #0b2a1e; --hx-muted: rgba(11,42,30,.7); --hx-input: #ffffff;
+          --accent: #0e7490; --accent2: #b45309; --warn: #c2410c; --violet: #6d28d9;
+        }
+        .projects::before { content: ''; position: absolute; inset: 0; pointer-events: none;
+          background: radial-gradient(ellipse at 50% 40%, transparent 20%, var(--hx-bg) 85%); }
+        .projects .container { position: relative; z-index: 1; }
+        .projects .text-primary { color: var(--primary); }
+        .projects .section-sub { color: var(--muted); font-size: .88rem; margin-top: .4rem; }
 
-        .filter-tabs {
-          display: flex; flex-wrap: wrap; gap: 0.5rem;
-          margin: 2rem 0 2.5rem;
-        }
-        .filter-tab {
-          background: none; border: 1px solid var(--border);
-          color: var(--muted); padding: 0.45rem 1rem;
-          border-radius: 100px; cursor: pointer;
-          font-size: 0.85rem; transition: all 0.2s;
-          font-family: var(--font-body);
-        }
-        .filter-tab:hover { color: var(--text); border-color: rgba(99,179,237,0.4); }
-        .filter-tab.active {
-          background: var(--primary); border-color: var(--primary);
-          color: var(--bg); font-weight: 600;
-        }
+        .projects .rv { opacity: 0; transform: translateY(16px); transition: opacity .55s ease, transform .55s ease; transition-delay: calc(var(--i, 0) * 80ms); }
+        .projects.in .rv { opacity: 1; transform: none; }
 
-        .projects-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-          gap: 1.5rem;
-        }
+        .projects .show-more-wrap { display: flex; justify-content: center; margin-top: 2.5rem; }
+        .projects .show-more-btn { display: inline-flex; align-items: center; gap: .5rem; background: var(--hx-panel); border: 1px solid var(--hx-dim);
+          color: var(--muted); padding: .6rem 1.75rem; border-radius: 6px; cursor: pointer; font-size: .85rem; font-family: inherit; transition: .2s; }
+        .projects .show-more-btn:hover { border-color: var(--hx); color: var(--hx); box-shadow: 0 0 18px var(--hx-dim); }
+        .projects button:focus-visible, .projects a:focus-visible, .projects input:focus-visible, .projects textarea:focus-visible, .projects .flip:focus-visible { outline: 2px solid var(--hx); outline-offset: 3px; }
+        @media (prefers-reduced-motion: reduce) { .projects .rv { opacity: 1; transform: none; transition: none; } }
 
-        .project-card {
-          background: var(--card); border: 1px solid var(--border);
-          border-radius: 12px; padding: 1.75rem;
-          transition: all 0.25s;
-          display: flex; flex-direction: column;
-        }
-        .project-card:hover {
-          border-color: rgba(99,179,237,0.3);
-          transform: translateY(-4px);
-          box-shadow: 0 12px 40px rgba(0,0,0,0.3);
-        }
+        .projects .filter-tabs { display: flex; flex-wrap: wrap; gap: .5rem; margin: 2rem 0 2.5rem; }
+        .projects .filter-tab { background: var(--hx-panel); border: 1px solid var(--hx-dim); color: var(--muted); padding: .45rem 1rem;
+          border-radius: 6px; cursor: pointer; font-size: .82rem; font-weight: 500; font-family: inherit; transition: .2s; }
+        .projects .filter-tab:hover { color: var(--text); border-color: var(--hx); }
+        .projects .filter-tab.active { background: var(--hx); border-color: var(--hx); color: var(--hx-bg); font-weight: 700; box-shadow: 0 0 18px var(--hx-dim); }
 
-        .project-top {
-          display: flex; align-items: center; justify-content: space-between;
-          margin-bottom: 1rem;
-        }
-        .project-icon { font-size: 2rem; }
-        .project-cat {
-          font-size: 0.72rem; border: 1px solid;
-          padding: 0.2rem 0.65rem; border-radius: 100px;
-          font-family: var(--font-mono); opacity: 0.8;
-        }
+        .projects .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
+        .projects .project-card { background: var(--hx-panel); border: 1px solid var(--hx-dim); border-top: 3px solid var(--c);
+          border-radius: 10px; padding: 1.6rem; display: flex; flex-direction: column; }
+        .projects.in .project-card { transition: opacity .55s ease, transform .25s, border-color .25s, box-shadow .25s; }
+        .projects.in .project-card:hover { transform: translateY(-5px); border-color: var(--c);
+          box-shadow: 0 10px 40px color-mix(in srgb, var(--c) 22%, transparent); }
 
-        .project-title {
-          font-family: var(--font-display);
-          font-size: 1.1rem; font-weight: 700;
-          margin-bottom: 0.75rem;
-        }
-        .project-desc {
-          color: var(--muted); font-size: 0.87rem;
-          line-height: 1.7; flex: 1; margin-bottom: 1.25rem;
-          text-align: justify;
-        }
+        .projects .project-top { display: flex; align-items: center; justify-content: space-between; gap: .5rem; margin-bottom: 1rem; }
+        .projects .project-icon { font-size: 2rem; filter: drop-shadow(0 0 8px var(--c)); }
+        .projects .project-cat { font-size: .7rem; color: var(--c); border: 1px solid var(--c); padding: .2rem .65rem; border-radius: 4px; text-align: right; }
+        .projects .project-title { font-size: 1.05rem; font-weight: 700; margin-bottom: .75rem; }
+        .projects .project-desc { color: var(--muted); font-size: .84rem; line-height: 1.7; flex: 1; margin-bottom: 1.25rem; }
 
-        .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.25rem; }
-        .tag {
-          background: rgba(255,255,255,0.04);
-          border: 1px solid var(--border);
-          color: var(--muted); font-size: 0.72rem;
-          padding: 0.2rem 0.6rem; border-radius: 4px;
-          font-family: var(--font-mono);
-        }
+        .projects .project-tags { display: flex; flex-wrap: wrap; gap: .4rem; margin-bottom: 1.25rem; }
+        .projects .tag { background: color-mix(in srgb, var(--c) 8%, transparent); border: 1px solid var(--hx-dim); color: var(--muted);
+          font-size: .7rem; padding: .2rem .6rem; border-radius: 4px; }
 
-        .project-links {
-          display: flex; gap: 0.6rem;
-          padding-top: 1rem;
-          border-top: 1px solid var(--border);
-          margin-top: auto;
-        }
-        .proj-link {
-          display: inline-flex; align-items: center; gap: 0.35rem;
-          font-size: 0.8rem; padding: 0.4rem 0.85rem;
-          border-radius: 6px; border: 1px solid;
-          text-decoration: none; transition: all 0.2s;
-          font-weight: 500;
-        }
-        .github-link {
-          border-color: var(--border); color: var(--muted);
-        }
-        .github-link:hover {
-          border-color: var(--text); color: var(--text);
-        }
-        .live-link:hover {
-          opacity: 0.8; transform: translateY(-1px);
-        }
-        .show-more-wrap {
-          display: flex; justify-content: center;
-          margin-top: 2.5rem;
-        }
-        .show-more-btn {
-          display: inline-flex; align-items: center; gap: 0.5rem;
-          background: none; border: 1px solid var(--border);
-          color: var(--muted); padding: 0.6rem 1.75rem;
-          border-radius: 100px; cursor: pointer;
-          font-size: 0.88rem; font-family: var(--font-body);
-          transition: all 0.2s;
-        }
-        .show-more-btn:hover {
-          border-color: var(--primary); color: var(--primary);
-        }
+        .projects .project-links { display: flex; gap: .6rem; padding-top: 1rem; border-top: 1px solid var(--hx-dim); margin-top: auto; }
+        .projects .proj-link { display: inline-flex; align-items: center; gap: .35rem; font-size: .78rem; padding: .4rem .85rem;
+          border-radius: 6px; border: 1px solid; text-decoration: none; font-weight: 500; transition: .2s; }
+        .projects .live-link { border-color: var(--c); color: var(--c); }
+        .projects .live-link:hover { background: color-mix(in srgb, var(--c) 14%, transparent); transform: translateY(-1px); }
+        .projects .github-link { border-color: var(--hx-dim); color: var(--muted); }
+        .projects .github-link:hover { border-color: var(--text); color: var(--text); }
       `}</style>
     </section>
   )
